@@ -55,8 +55,9 @@ def item_texts(item):
 
 
 def check_text(text, lexicon, report, obj):
-    # Cloze placeholders are presentation markup, not numbers in the passage.
+    # Cloze placeholders and letter-hint blanks (l______r) are markup, not words.
     text = re.sub(r"\{\{\d+\}\}", " ___ ", text)
+    text = re.sub(r"[A-Za-z]*_{2,}[A-Za-z]*", " ___ ", text)
     for match in lexicon.scan(text):
         if match.kind in {"number", "proper_name"}:
             label = "數字" if match.kind == "number" else "可能的專有名詞"

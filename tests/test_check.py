@@ -270,6 +270,10 @@ class ExamTests(unittest.TestCase):
         found = {w for e in check([q]).errors if e.code == "out_of_scope" for w in e.words}
         self.assertEqual(found, {"quokka", "yak", "zebra"})
 
+    def test_letter_hint_blanks_are_not_words(self):
+        report = check([item(kind="word_in_context", stem="the cat b______e and the l____r ______")])
+        self.assertNotIn("out_of_scope", codes(report))
+
     def test_cloze_placeholders_are_not_number_info(self):
         group = Group(id="group", section_id="s", kind="cloze", instruction="請填空",
                       passage="the {{1}} cat", items=[item(kind="cloze")])

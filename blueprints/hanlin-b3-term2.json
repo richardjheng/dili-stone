@@ -1,0 +1,32 @@
+{
+  "id": "hanlin-b3-term2",
+  "exam": {
+    "title": "第二次段考",
+    "exam_type": "term",
+    "academic_year": "115",
+    "semester": 1,
+    "duration_minutes": 45
+  },
+  "header": {
+    "school_name": "○○國民中學",
+    "grade": 8,
+    "scope_text": "翰林版第三冊 Unit 2～5"
+  },
+  "scope": ["hanlin-b3-u2", "hanlin-b3-u3", "hanlin-b3-u4", "hanlin-b3-u5"],
+  "prerequisite": {"wordlist_id": "moe2000", "lesson_ids": []},
+  "sections": [
+    {"id": "choice", "title": "單題選擇", "kind": "single_choice",
+     "item_count": 25, "points_per_item": "2"},
+    {"id": "cloze", "title": "克漏字", "part": "題組（克漏字與閱讀測驗）", "kind": "cloze",
+     "item_count": 10, "points_per_item": "1.5", "group_count": 2, "items_per_group": [5, 5]},
+    {"id": "reading", "title": "閱讀測驗", "part": "題組（克漏字與閱讀測驗）", "kind": "reading",
+     "item_count": 10, "points_per_item": "1.5", "group_count": 4, "items_per_group": [2, 3, 3, 2],
+     "allow_figures": true},
+    {"id": "words", "title": "文意字彙", "kind": "word_in_context",
+     "item_count": 10, "points_per_item": "1"},
+    {"id": "writing", "title": "依提示作答與翻譯", "kind": "guided_writing",
+     "item_count": 5, "points_per_item": "2"}
+  ],
+  "total_items": 60,
+  "total_points": "100"
+}
