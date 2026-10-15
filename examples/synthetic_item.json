@@ -1,0 +1,47 @@
+{
+  "id": "demo-q1",
+  "section_id": "choice",
+  "kind": "single_choice",
+  "number": 1,
+  "stem": "Mira enjoys _____ tiny blue boxes after lunch.",
+  "choices": {
+    "A": "painting",
+    "B": "paint",
+    "C": "painted",
+    "D": "paints"
+  },
+  "answer": {
+    "choice": "A"
+  },
+  "explanation": {
+    "correct_zh": "enjoy 後以動名詞表達活動，因此選 painting。",
+    "distractors": [
+      {
+        "option": "B",
+        "reason_zh": "此處不能直接接原形動詞。"
+      },
+      {
+        "option": "C",
+        "reason_zh": "過去式不能在此處作活動名稱。"
+      },
+      {
+        "option": "D",
+        "reason_zh": "第三人稱單數動詞不能在此處作受詞。"
+      }
+    ]
+  },
+  "targets": {
+    "vocab_ids": [
+      "demo-u4-paint"
+    ],
+    "grammar_ids": [
+      "demo-u4-enjoy"
+    ]
+  },
+  "glossed": [
+    {
+      "word": "tiny",
+      "meaning_zh": "很小的"
+    }
+  ]
+}

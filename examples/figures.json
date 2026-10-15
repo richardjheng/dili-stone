@@ -1,0 +1,147 @@
+[
+  {
+    "kind": "street_map",
+    "id": "map-demo",
+    "title": "虛構小鎮",
+    "width": 2,
+    "height": 2,
+    "vertical_streets": [
+      "Pine Lane",
+      "Cloud Lane",
+      "Moon Lane"
+    ],
+    "horizontal_streets": [
+      "First Road",
+      "Second Road",
+      "Third Road"
+    ],
+    "places": [
+      {
+        "id": "studio",
+        "name": "Art Studio",
+        "kind": "building",
+        "block": {
+          "x": 1,
+          "y": 0
+        },
+        "side": "E",
+        "slot": 2
+      },
+      {
+        "id": "studio-stop",
+        "name": "Studio Stop",
+        "kind": "stop",
+        "block": {
+          "x": 1,
+          "y": 0
+        },
+        "side": "E",
+        "slot": 2
+      },
+      {
+        "id": "bakery",
+        "name": "Bakery",
+        "kind": "building",
+        "block": {
+          "x": 1,
+          "y": 0
+        },
+        "side": "E",
+        "slot": 1
+      }
+    ],
+    "start": {
+      "x": 0,
+      "y": 0
+    },
+    "facing": "north",
+    "directions": [
+      {
+        "direction": "east",
+        "blocks": 2
+      },
+      {
+        "direction": "north",
+        "blocks": 1
+      }
+    ],
+    "slots_per_side": 3,
+    "arrival": {
+      "side": "left",
+      "position": "corner"
+    }
+  },
+  {
+    "kind": "route",
+    "id": "route-demo",
+    "title": "虛構接駁車",
+    "service_day": "示範日",
+    "stops": [
+      {
+        "id": "pond",
+        "name": "Pond",
+        "arrival_minute": 480,
+        "departure_minute": 482
+      },
+      {
+        "id": "hill",
+        "name": "Hill",
+        "arrival_minute": 493,
+        "departure_minute": 495
+      },
+      {
+        "id": "studio",
+        "name": "Studio",
+        "arrival_minute": 507,
+        "departure_minute": 507
+      }
+    ]
+  },
+  {
+    "kind": "table",
+    "id": "table-demo",
+    "title": "虛構材料價目表",
+    "purpose": "prices",
+    "columns": [
+      {
+        "id": "price",
+        "label": "Price",
+        "unit": "TWD"
+      }
+    ],
+    "rows": [
+      {
+        "id": "box",
+        "label": "Small box",
+        "cells": [
+          "12"
+        ]
+      },
+      {
+        "id": "brush",
+        "label": "Brush",
+        "cells": [
+          "8"
+        ]
+      }
+    ]
+  },
+  {
+    "kind": "venn",
+    "id": "venn-demo",
+    "title": "虛構活動名單",
+    "left_label": "Paint",
+    "right_label": "Sing",
+    "left": [
+      "Mira",
+      "Owen"
+    ],
+    "right": [
+      "Owen",
+      "Zia"
+    ],
+    "intersection": [
+      "Owen"
+    ]
+  }
+]

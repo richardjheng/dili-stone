@@ -1,0 +1,55 @@
+{
+  "id": "demo-b3-u4",
+  "publisher": "示範出版社（假資料）",
+  "volume": 3,
+  "unit": 4,
+  "title": "自編測試單元",
+  "academic_year": "115",
+  "completeness": "partial",
+  "sources": [
+    {
+      "id": "manual",
+      "filename": "handwritten-fixture",
+      "pdf_page": null,
+      "printed_page": null,
+      "usage_terms": "本專案手寫假資料；非教材摘錄。"
+    }
+  ],
+  "vocab": [
+    {
+      "id": "demo-u4-paint",
+      "headword": "paint",
+      "pos": [
+        "v.",
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "paint-v",
+          "meaning_zh": "塗色",
+          "is_secondary": false
+        },
+        {
+          "id": "paint-n",
+          "meaning_zh": "顏料",
+          "is_secondary": true
+        }
+      ],
+      "textbook_category": "application",
+      "category_heading": "假設應用字彙",
+      "source_refs": [
+        "manual"
+      ]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "demo-u4-enjoy",
+      "name": "enjoy 後接動名詞",
+      "description": "以動名詞表達喜歡從事的活動。此說明為測試自行撰寫。",
+      "source_refs": [
+        "manual"
+      ]
+    }
+  ]
+}

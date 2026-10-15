@@ -1,0 +1,24 @@
+{
+  "id": "demo-wrong-q1",
+  "section_id": "choice",
+  "kind": "single_choice",
+  "polarity": "wrong",
+  "number": 1,
+  "stem": "Choose the WRONG sentence about the word paint.",
+  "choices": {
+    "A": "Mira enjoys painting boxes.",
+    "B": "Mira enjoys paint boxes.",
+    "C": "Mira likes to paint boxes.",
+    "D": "Mira paints boxes on Sundays."
+  },
+  "answer": {"choice": "B"},
+  "explanation": {
+    "correct_zh": "題目要求選出錯誤句；enjoy 後應接動名詞，B 卻接原形，所以應選 B。",
+    "distractors": [
+      {"option": "A", "reason_zh": "enjoy 後接 painting，用法正確，因此不選。"},
+      {"option": "C", "reason_zh": "like 後接 to paint，用法正確，因此不選。"},
+      {"option": "D", "reason_zh": "第三人稱單數主詞搭配 paints，用法正確，因此不選。"}
+    ]
+  },
+  "targets": {"grammar_ids": ["demo-u4-enjoy"]}
+}

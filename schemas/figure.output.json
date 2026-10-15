@@ -1,0 +1,527 @@
+{
+  "$defs": {
+    "Arrival": {
+      "additionalProperties": false,
+      "properties": {
+        "side": {
+          "enum": [
+            "left",
+            "right"
+          ],
+          "title": "Side",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "const": "corner",
+              "type": "string"
+            },
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            }
+          ],
+          "description": "corner，或由終點往回數第 n 棟 building（正整數）；略過空格與 stop。",
+          "title": "Position"
+        }
+      },
+      "required": [
+        "side",
+        "position"
+      ],
+      "title": "Arrival",
+      "type": "object"
+    },
+    "Coordinate": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "minimum": 0,
+          "title": "X",
+          "type": "integer"
+        },
+        "y": {
+          "minimum": 0,
+          "title": "Y",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "title": "Coordinate",
+      "type": "object"
+    },
+    "MapStep": {
+      "additionalProperties": false,
+      "properties": {
+        "direction": {
+          "enum": [
+            "north",
+            "east",
+            "south",
+            "west"
+          ],
+          "title": "Direction",
+          "type": "string"
+        },
+        "blocks": {
+          "exclusiveMinimum": 0,
+          "title": "Blocks",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "direction",
+        "blocks"
+      ],
+      "title": "MapStep",
+      "type": "object"
+    },
+    "Place": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "building",
+            "stop"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "block": {
+          "$ref": "#/$defs/Coordinate"
+        },
+        "side": {
+          "enum": [
+            "N",
+            "E",
+            "S",
+            "W"
+          ],
+          "title": "Side",
+          "type": "string"
+        },
+        "slot": {
+          "minimum": 0,
+          "title": "Slot",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "kind",
+        "block",
+        "side",
+        "slot"
+      ],
+      "title": "Place",
+      "type": "object"
+    },
+    "Route": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "route",
+          "default": "route",
+          "title": "Kind",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "service_day": {
+          "minLength": 1,
+          "title": "Service Day",
+          "type": "string"
+        },
+        "stops": {
+          "items": {
+            "$ref": "#/$defs/RouteStop"
+          },
+          "minItems": 2,
+          "title": "Stops",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "service_day",
+        "stops"
+      ],
+      "title": "Route",
+      "type": "object"
+    },
+    "RouteStop": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "arrival_minute": {
+          "minimum": 0,
+          "title": "Arrival Minute",
+          "type": "integer"
+        },
+        "departure_minute": {
+          "minimum": 0,
+          "title": "Departure Minute",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "arrival_minute",
+        "departure_minute"
+      ],
+      "title": "RouteStop",
+      "type": "object"
+    },
+    "StreetMap": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "street_map",
+          "default": "street_map",
+          "title": "Kind",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "width": {
+          "exclusiveMinimum": 0,
+          "title": "Width",
+          "type": "integer"
+        },
+        "height": {
+          "exclusiveMinimum": 0,
+          "title": "Height",
+          "type": "integer"
+        },
+        "slots_per_side": {
+          "minimum": 2,
+          "title": "Slots Per Side",
+          "type": "integer"
+        },
+        "vertical_streets": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Vertical Streets",
+          "type": "array"
+        },
+        "horizontal_streets": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Horizontal Streets",
+          "type": "array"
+        },
+        "places": {
+          "items": {
+            "$ref": "#/$defs/Place"
+          },
+          "minItems": 1,
+          "title": "Places",
+          "type": "array"
+        },
+        "start": {
+          "$ref": "#/$defs/Coordinate"
+        },
+        "facing": {
+          "enum": [
+            "north",
+            "east",
+            "south",
+            "west"
+          ],
+          "title": "Facing",
+          "type": "string"
+        },
+        "directions": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/MapStep"
+          },
+          "title": "Directions",
+          "type": "array"
+        },
+        "arrival": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Arrival"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "width",
+        "height",
+        "slots_per_side",
+        "vertical_streets",
+        "horizontal_streets",
+        "places",
+        "start",
+        "facing"
+      ],
+      "title": "StreetMap",
+      "type": "object"
+    },
+    "Table": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "table",
+          "default": "table",
+          "title": "Kind",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "purpose": {
+          "enum": [
+            "notes",
+            "timetable",
+            "prices",
+            "general"
+          ],
+          "title": "Purpose",
+          "type": "string"
+        },
+        "columns": {
+          "items": {
+            "$ref": "#/$defs/TableColumn"
+          },
+          "minItems": 1,
+          "title": "Columns",
+          "type": "array"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/TableRow"
+          },
+          "minItems": 1,
+          "title": "Rows",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "purpose",
+        "columns",
+        "rows"
+      ],
+      "title": "Table",
+      "type": "object"
+    },
+    "TableColumn": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unit"
+        }
+      },
+      "required": [
+        "id",
+        "label"
+      ],
+      "title": "TableColumn",
+      "type": "object"
+    },
+    "TableRow": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "cells": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Cells",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "cells"
+      ],
+      "title": "TableRow",
+      "type": "object"
+    },
+    "Venn": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "venn",
+          "default": "venn",
+          "title": "Kind",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "left_label": {
+          "minLength": 1,
+          "title": "Left Label",
+          "type": "string"
+        },
+        "right_label": {
+          "minLength": 1,
+          "title": "Right Label",
+          "type": "string"
+        },
+        "left": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Left",
+          "type": "array"
+        },
+        "right": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Right",
+          "type": "array"
+        },
+        "intersection": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Intersection",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "left_label",
+        "right_label",
+        "left",
+        "right",
+        "intersection"
+      ],
+      "title": "Venn",
+      "type": "object"
+    }
+  },
+  "discriminator": {
+    "mapping": {
+      "route": "#/$defs/Route",
+      "street_map": "#/$defs/StreetMap",
+      "table": "#/$defs/Table",
+      "venn": "#/$defs/Venn"
+    },
+    "propertyName": "kind"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/StreetMap"
+    },
+    {
+      "$ref": "#/$defs/Route"
+    },
+    {
+      "$ref": "#/$defs/Table"
+    },
+    {
+      "$ref": "#/$defs/Venn"
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:dili:schema:figure.output:0.1.0"
+}

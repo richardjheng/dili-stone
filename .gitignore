@@ -3,3 +3,9 @@
 # 原始教材與範本考卷（受著作權保護，不進 git）
 materials/*
 !materials/README.md
+
+# Python
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/

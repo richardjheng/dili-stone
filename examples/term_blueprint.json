@@ -1,0 +1,81 @@
+{
+  "id": "hanlin-b3-u2-u5-term-demo",
+  "exam": {
+    "title": "八上段考藍圖（結構示範）",
+    "exam_type": "term",
+    "academic_year": "115",
+    "semester": 1,
+    "duration_minutes": 50
+  },
+  "header": {
+    "school_name": "示範學校",
+    "grade": 8,
+    "scope_text": "佳音翰林 B3 U2–U5",
+    "show_points": true
+  },
+  "scope": [
+    "hanlin-b3-u2",
+    "hanlin-b3-u3",
+    "hanlin-b3-u4",
+    "hanlin-b3-u5"
+  ],
+  "prerequisite": {
+    "wordlist_id": "moe2000",
+    "lesson_ids": []
+  },
+  "sections": [
+    {
+      "id": "choice",
+      "title": "單題選擇",
+      "kind": "single_choice",
+      "item_count": 25,
+      "points_per_item": "2"
+    },
+    {
+      "id": "cloze",
+      "title": "克漏字",
+      "kind": "cloze",
+      "item_count": 6,
+      "points_per_item": "1.5",
+      "group_count": 2,
+      "items_per_group": [
+        3,
+        3
+      ],
+      "allow_figures": true,
+      "part": "第二部分、題組"
+    },
+    {
+      "id": "reading",
+      "title": "閱讀題組",
+      "kind": "reading",
+      "item_count": 14,
+      "points_per_item": "1.5",
+      "group_count": 4,
+      "items_per_group": [
+        3,
+        3,
+        4,
+        4
+      ],
+      "allow_figures": true,
+      "part": "第二部分、題組"
+    },
+    {
+      "id": "words",
+      "title": "文意字彙",
+      "kind": "word_in_context",
+      "item_count": 10,
+      "points_per_item": "1"
+    },
+    {
+      "id": "writing",
+      "title": "依提示作答與翻譯",
+      "kind": "guided_writing",
+      "item_count": 5,
+      "points_per_item": "2"
+    }
+  ],
+  "total_items": 60,
+  "total_points": "100"
+}

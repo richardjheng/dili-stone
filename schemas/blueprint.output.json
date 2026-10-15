@@ -1,0 +1,403 @@
+{
+  "$defs": {
+    "ExamInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "exam_type": {
+          "enum": [
+            "quiz",
+            "term",
+            "review"
+          ],
+          "title": "Exam Type",
+          "type": "string"
+        },
+        "academic_year": {
+          "minLength": 1,
+          "title": "Academic Year",
+          "type": "string"
+        },
+        "semester": {
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Semester",
+          "type": "integer"
+        },
+        "duration_minutes": {
+          "exclusiveMinimum": 0,
+          "title": "Duration Minutes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "title",
+        "exam_type",
+        "academic_year",
+        "semester",
+        "duration_minutes"
+      ],
+      "title": "ExamInfo",
+      "type": "object"
+    },
+    "Header": {
+      "additionalProperties": false,
+      "properties": {
+        "school_name": {
+          "minLength": 1,
+          "title": "School Name",
+          "type": "string"
+        },
+        "grade": {
+          "exclusiveMinimum": 0,
+          "title": "Grade",
+          "type": "integer"
+        },
+        "show_class_field": {
+          "default": true,
+          "title": "Show Class Field",
+          "type": "boolean"
+        },
+        "show_seat_field": {
+          "default": true,
+          "title": "Show Seat Field",
+          "type": "boolean"
+        },
+        "show_name_field": {
+          "default": true,
+          "title": "Show Name Field",
+          "type": "boolean"
+        },
+        "scope_text": {
+          "minLength": 1,
+          "title": "Scope Text",
+          "type": "string"
+        },
+        "show_points": {
+          "default": true,
+          "title": "Show Points",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "school_name",
+        "grade",
+        "scope_text"
+      ],
+      "title": "Header",
+      "type": "object"
+    },
+    "Prerequisite": {
+      "additionalProperties": false,
+      "properties": {
+        "reviews": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ReviewRecord"
+          },
+          "title": "Reviews",
+          "type": "array"
+        },
+        "unresolved": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ReviewIssue"
+          },
+          "title": "Unresolved",
+          "type": "array"
+        },
+        "wordlist_id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Wordlist Id",
+          "type": "string"
+        },
+        "lesson_ids": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+            "type": "string"
+          },
+          "title": "Lesson Ids",
+          "type": "array"
+        },
+        "content_hash": {
+          "readOnly": true,
+          "title": "Content Hash",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "reviewed"
+          ],
+          "readOnly": true,
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "wordlist_id",
+        "lesson_ids",
+        "content_hash",
+        "status"
+      ],
+      "title": "Prerequisite",
+      "type": "object"
+    },
+    "ReviewIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "sense",
+            "prerequisite",
+            "grammar",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "reference": {
+          "minLength": 1,
+          "title": "Reference",
+          "type": "string"
+        },
+        "notes": {
+          "minLength": 1,
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "reference",
+        "notes"
+      ],
+      "title": "ReviewIssue",
+      "type": "object"
+    },
+    "ReviewRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "reviewer": {
+          "minLength": 1,
+          "title": "Reviewer",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "human",
+            "ai"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "content_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Content Hash",
+          "type": "string"
+        },
+        "decision": {
+          "default": "note",
+          "enum": [
+            "note",
+            "approve",
+            "request_changes"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "notes": {
+          "minLength": 1,
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reviewer",
+        "role",
+        "timestamp",
+        "content_hash",
+        "notes"
+      ],
+      "title": "ReviewRecord",
+      "type": "object"
+    },
+    "Section": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "minLength": 1,
+          "title": "Title",
+          "type": "string"
+        },
+        "part": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Part"
+        },
+        "kind": {
+          "enum": [
+            "single_choice",
+            "cloze",
+            "reading",
+            "word_in_context",
+            "guided_writing"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "item_count": {
+          "exclusiveMinimum": 0,
+          "title": "Item Count",
+          "type": "integer"
+        },
+        "points_per_item": {
+          "title": "Points Per Item",
+          "type": "string"
+        },
+        "group_count": {
+          "default": 0,
+          "minimum": 0,
+          "title": "Group Count",
+          "type": "integer"
+        },
+        "items_per_group": {
+          "default": [],
+          "items": {
+            "exclusiveMinimum": 0,
+            "type": "integer"
+          },
+          "title": "Items Per Group",
+          "type": "array"
+        },
+        "allow_figures": {
+          "default": false,
+          "title": "Allow Figures",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "kind",
+        "item_count",
+        "points_per_item"
+      ],
+      "title": "Section",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reviews": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ReviewRecord"
+      },
+      "title": "Reviews",
+      "type": "array"
+    },
+    "unresolved": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ReviewIssue"
+      },
+      "title": "Unresolved",
+      "type": "array"
+    },
+    "id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+      "title": "Id",
+      "type": "string"
+    },
+    "exam": {
+      "$ref": "#/$defs/ExamInfo"
+    },
+    "header": {
+      "$ref": "#/$defs/Header"
+    },
+    "scope": {
+      "items": {
+        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Scope",
+      "type": "array"
+    },
+    "prerequisite": {
+      "$ref": "#/$defs/Prerequisite"
+    },
+    "sections": {
+      "items": {
+        "$ref": "#/$defs/Section"
+      },
+      "minItems": 1,
+      "title": "Sections",
+      "type": "array"
+    },
+    "total_items": {
+      "exclusiveMinimum": 0,
+      "title": "Total Items",
+      "type": "integer"
+    },
+    "total_points": {
+      "title": "Total Points",
+      "type": "string"
+    },
+    "content_hash": {
+      "readOnly": true,
+      "title": "Content Hash",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "reviewed"
+      ],
+      "readOnly": true,
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "exam",
+    "header",
+    "scope",
+    "prerequisite",
+    "sections",
+    "total_items",
+    "total_points",
+    "content_hash",
+    "status"
+  ],
+  "title": "Blueprint",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:dili:schema:blueprint.output:0.1.0"
+}

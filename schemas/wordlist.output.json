@@ -1,0 +1,266 @@
+{
+  "$defs": {
+    "ReviewIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "sense",
+            "prerequisite",
+            "grammar",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "reference": {
+          "minLength": 1,
+          "title": "Reference",
+          "type": "string"
+        },
+        "notes": {
+          "minLength": 1,
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "reference",
+        "notes"
+      ],
+      "title": "ReviewIssue",
+      "type": "object"
+    },
+    "ReviewRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "reviewer": {
+          "minLength": 1,
+          "title": "Reviewer",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "human",
+            "ai"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "content_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Content Hash",
+          "type": "string"
+        },
+        "decision": {
+          "default": "note",
+          "enum": [
+            "note",
+            "approve",
+            "request_changes"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "notes": {
+          "minLength": 1,
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reviewer",
+        "role",
+        "timestamp",
+        "content_hash",
+        "notes"
+      ],
+      "title": "ReviewRecord",
+      "type": "object"
+    },
+    "WordEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "headword": {
+          "minLength": 1,
+          "title": "Headword",
+          "type": "string"
+        },
+        "pos": {
+          "title": "Pos",
+          "type": "string"
+        },
+        "basic_1200": {
+          "title": "Basic 1200",
+          "type": "boolean"
+        },
+        "note": {
+          "default": "",
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "headword",
+        "pos",
+        "basic_1200"
+      ],
+      "title": "WordEntry",
+      "type": "object"
+    },
+    "WordListMetadata": {
+      "additionalProperties": false,
+      "properties": {
+        "source_url": {
+          "format": "uri",
+          "minLength": 1,
+          "title": "Source Url",
+          "type": "string"
+        },
+        "source_document": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Document"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        },
+        "retrieved_date": {
+          "format": "date",
+          "title": "Retrieved Date",
+          "type": "string"
+        },
+        "usage_terms": {
+          "minLength": 1,
+          "title": "Usage Terms",
+          "type": "string"
+        },
+        "entry_count": {
+          "minimum": 0,
+          "title": "Entry Count",
+          "type": "integer"
+        },
+        "basic_1200_count": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Basic 1200 Count"
+        },
+        "method": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Method"
+        },
+        "known_issues": {
+          "default": [],
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Known Issues",
+          "type": "array"
+        }
+      },
+      "required": [
+        "source_url",
+        "version",
+        "retrieved_date",
+        "usage_terms",
+        "entry_count"
+      ],
+      "title": "WordListMetadata",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reviews": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ReviewRecord"
+      },
+      "title": "Reviews",
+      "type": "array"
+    },
+    "unresolved": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ReviewIssue"
+      },
+      "title": "Unresolved",
+      "type": "array"
+    },
+    "id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+      "title": "Id",
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "#/$defs/WordListMetadata"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/WordEntry"
+      },
+      "minItems": 1,
+      "title": "Entries",
+      "type": "array"
+    },
+    "content_hash": {
+      "readOnly": true,
+      "title": "Content Hash",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "pending",
+        "reviewed"
+      ],
+      "readOnly": true,
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "metadata",
+    "entries",
+    "content_hash",
+    "status"
+  ],
+  "title": "WordList",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:dili:schema:wordlist.output:0.1.0"
+}

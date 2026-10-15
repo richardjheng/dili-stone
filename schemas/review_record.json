@@ -1,0 +1,54 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "reviewer": {
+      "minLength": 1,
+      "title": "Reviewer",
+      "type": "string"
+    },
+    "role": {
+      "enum": [
+        "human",
+        "ai"
+      ],
+      "title": "Role",
+      "type": "string"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "content_hash": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Content Hash",
+      "type": "string"
+    },
+    "decision": {
+      "default": "note",
+      "enum": [
+        "note",
+        "approve",
+        "request_changes"
+      ],
+      "title": "Decision",
+      "type": "string"
+    },
+    "notes": {
+      "minLength": 1,
+      "title": "Notes",
+      "type": "string"
+    }
+  },
+  "required": [
+    "reviewer",
+    "role",
+    "timestamp",
+    "content_hash",
+    "notes"
+  ],
+  "title": "ReviewRecord",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:dili:schema:review_record:0.1.0"
+}

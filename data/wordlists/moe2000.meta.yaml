@@ -1,0 +1,13 @@
+source_url: "https://www.naer.edu.tw/upload/1/16/doc/812/(發布版)國民中小學暨普通型高級中等學校-語文領域-英語文課程綱要.pdf"
+source_document: "十二年國民基本教育課程綱要 國民中小學暨普通型高級中等學校 語文領域-英語文（附錄五：參考字彙表（2,000 字））"
+version: "中華民國一○七年四月發布版（國家教育研究院；PDF SHA-256 72c6a6a24dbfe843e2c510f12b4d5e3e9ea53d0586396a7b03f4eda6d17490e3）"
+retrieved_date: 2026-10-15
+usage_terms: "國家教育研究院公開發布之課程綱要；本專案僅擷取字詞清單，作為出卷先備知識判斷"
+entry_count: 2005
+basic_1200_count: 1211
+method: "以 PyMuPDF 抽出 PDF 第 56–61 頁（印刷頁 54–59）的表一（基本 1,200 字）與表二（其他常用 800 字），依字母段與括號外的逗號切分，保留原表寫法；表一 basic_1200=true、表二 false。"
+known_issues:
+  - "官方標稱 1,200＋800，實際列出表一 1,211 筆、表二 794 筆，共 2,005 筆；照原表收錄，不增刪。"
+  - "表一、表二沒有標示詞性；表三只依主題分類、未標詞性，pos 欄一律留空。"
+  - "headword 保留原表括號寫法，例如 be (am, is, are, was, were, been)、airplane (plane)、doctor (Dr.)、shoe (s)；括號內的變化形與同義寫法需由檢核器展開。"
+  - "表三的主題分類與底線標示尚未收錄。"

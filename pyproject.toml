@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dili"
+version = "0.1.0"
+description = "Structured lesson and exam models for dili-stone"
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2,<3", "pyyaml>=6", "python-docx>=1.1", "matplotlib>=3.8"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

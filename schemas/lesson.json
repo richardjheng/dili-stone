@@ -1,0 +1,439 @@
+{
+  "$defs": {
+    "GrammarPoint": {
+      "additionalProperties": false,
+      "properties": {
+        "reviews": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ReviewRecord"
+          },
+          "title": "Reviews",
+          "type": "array"
+        },
+        "unresolved": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ReviewIssue"
+          },
+          "title": "Unresolved",
+          "type": "array"
+        },
+        "id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "source_refs": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "source_refs"
+      ],
+      "title": "GrammarPoint",
+      "type": "object"
+    },
+    "ReviewIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "sense",
+            "prerequisite",
+            "grammar",
+            "other"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "reference": {
+          "minLength": 1,
+          "title": "Reference",
+          "type": "string"
+        },
+        "notes": {
+          "minLength": 1,
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "reference",
+        "notes"
+      ],
+      "title": "ReviewIssue",
+      "type": "object"
+    },
+    "ReviewRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "reviewer": {
+          "minLength": 1,
+          "title": "Reviewer",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "human",
+            "ai"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "content_hash": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Content Hash",
+          "type": "string"
+        },
+        "decision": {
+          "default": "note",
+          "enum": [
+            "note",
+            "approve",
+            "request_changes"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "notes": {
+          "minLength": 1,
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reviewer",
+        "role",
+        "timestamp",
+        "content_hash",
+        "notes"
+      ],
+      "title": "ReviewRecord",
+      "type": "object"
+    },
+    "Sense": {
+      "additionalProperties": false,
+      "properties": {
+        "reviews": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ReviewRecord"
+          },
+          "title": "Reviews",
+          "type": "array"
+        },
+        "unresolved": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ReviewIssue"
+          },
+          "title": "Unresolved",
+          "type": "array"
+        },
+        "id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "meaning_zh": {
+          "minLength": 1,
+          "pattern": "[\\u3400-\\u4dbf\\u4e00-\\u9fff]",
+          "title": "Meaning Zh",
+          "type": "string"
+        },
+        "is_secondary": {
+          "default": false,
+          "title": "Is Secondary",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "meaning_zh"
+      ],
+      "title": "Sense",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "filename": {
+          "minLength": 1,
+          "title": "Filename",
+          "type": "string"
+        },
+        "pdf_page": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Pdf Page"
+        },
+        "printed_page": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Printed Page"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        },
+        "usage_terms": {
+          "minLength": 1,
+          "title": "Usage Terms",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "filename",
+        "usage_terms"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "VocabEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "reviews": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ReviewRecord"
+          },
+          "title": "Reviews",
+          "type": "array"
+        },
+        "unresolved": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/ReviewIssue"
+          },
+          "title": "Unresolved",
+          "type": "array"
+        },
+        "id": {
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+          "title": "Id",
+          "type": "string"
+        },
+        "headword": {
+          "minLength": 1,
+          "title": "Headword",
+          "type": "string"
+        },
+        "pos": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Pos",
+          "type": "array"
+        },
+        "senses": {
+          "items": {
+            "$ref": "#/$defs/Sense"
+          },
+          "minItems": 1,
+          "title": "Senses",
+          "type": "array"
+        },
+        "is_phrase": {
+          "default": false,
+          "title": "Is Phrase",
+          "type": "boolean"
+        },
+        "textbook_category": {
+          "enum": [
+            "application",
+            "recognition"
+          ],
+          "title": "Textbook Category",
+          "type": "string"
+        },
+        "category_heading": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Category Heading"
+        },
+        "source_refs": {
+          "items": {
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Source Refs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "headword",
+        "pos",
+        "senses",
+        "textbook_category",
+        "source_refs"
+      ],
+      "title": "VocabEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "reviews": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ReviewRecord"
+      },
+      "title": "Reviews",
+      "type": "array"
+    },
+    "unresolved": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ReviewIssue"
+      },
+      "title": "Unresolved",
+      "type": "array"
+    },
+    "id": {
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
+      "title": "Id",
+      "type": "string"
+    },
+    "publisher": {
+      "minLength": 1,
+      "title": "Publisher",
+      "type": "string"
+    },
+    "volume": {
+      "exclusiveMinimum": 0,
+      "title": "Volume",
+      "type": "integer"
+    },
+    "unit": {
+      "exclusiveMinimum": 0,
+      "title": "Unit",
+      "type": "integer"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "academic_year": {
+      "minLength": 1,
+      "title": "Academic Year",
+      "type": "string"
+    },
+    "completeness": {
+      "enum": [
+        "complete",
+        "partial"
+      ],
+      "title": "Completeness",
+      "type": "string"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/Source"
+      },
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    },
+    "vocab": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/VocabEntry"
+      },
+      "title": "Vocab",
+      "type": "array"
+    },
+    "grammar": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/GrammarPoint"
+      },
+      "title": "Grammar",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "publisher",
+    "volume",
+    "unit",
+    "title",
+    "academic_year",
+    "completeness",
+    "sources"
+  ],
+  "title": "Lesson",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:dili:schema:lesson:0.1.0"
+}
