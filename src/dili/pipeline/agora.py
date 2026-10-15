@@ -39,18 +39,37 @@ def thread_dir(thread: str, workspace: Path = Path(".")) -> Path:
     return workspace / ".agora" / "threads" / thread
 
 
-def wait(thread: str, *, timeout: float = 3 * 3600, poll: float = 20) -> str:
-    """Block until the assignment leaves the active states; returns the final relay status."""
+def relay_status(thread: str) -> str:
     state_path = thread_dir(thread) / "state.json"
+    if not state_path.exists():
+        return "none"
+    relay = json.loads(state_path.read_text(encoding="utf-8")).get("relay") or {}
+    return relay.get("status", "none")
+
+
+def is_active(thread: str) -> bool:
+    return relay_status(thread) in ACTIVE
+
+
+def wait(thread: str, *, timeout: float = 3 * 3600, poll: float = 20, settle: float = 60) -> str:
+    """Block until the assignment has really ended; returns the final relay status.
+
+    Agora can briefly mark a just-started relay "interrupted" (its PID is recorded after the
+    status), so an ended state only counts once it has stayed the same for `settle` seconds.
+    """
     deadline = time.monotonic() + timeout
-    while True:
-        relay = json.loads(state_path.read_text(encoding="utf-8")).get("relay") or {}
-        status = relay.get("status", "unknown")
-        if status not in ACTIVE:
+    ended_since, last = None, None
+    while time.monotonic() < deadline:
+        status = relay_status(thread)
+        if status in ACTIVE:
+            ended_since = None
+        elif status != last or ended_since is None:
+            ended_since = time.monotonic()
+        elif time.monotonic() - ended_since >= settle:
             return status
-        if time.monotonic() >= deadline:
-            return "timeout"
+        last = status
         time.sleep(poll)
+    return "timeout"
 
 
 def worker_denials(thread: str) -> list[str]:

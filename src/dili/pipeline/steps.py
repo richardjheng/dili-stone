@@ -83,9 +83,13 @@ def generate_section(run: Run, section_id: str, catalog: Catalog, *, worker: str
         order.write_text(generation_order(run, section_id, lessons, worker=worker, previous_errors=previous),
                          encoding="utf-8")
         run.make_current()
-        run.update_section(section_id, status="generating", attempts=attempt)
-        log(f"[{section_id}] 第 {attempt} 次派給 {worker}（{thread}）")
-        agora.assign(thread, worker, order)
+        if agora.is_active(thread):
+            # Resume: a previous process already assigned this attempt; just wait for it.
+            log(f"[{section_id}] {thread} 已有進行中的接手，等待完成")
+        else:
+            run.update_section(section_id, status="generating", attempts=attempt)
+            log(f"[{section_id}] 第 {attempt} 次派給 {worker}（{thread}）")
+            agora.assign(thread, worker, order)
         final = agora.wait(thread)
         report = validate_section(run, section_id, catalog)
         log(f"[{section_id}] 接手方狀態 {final}；{report.render().splitlines()[0]}")
@@ -112,8 +116,9 @@ def review_section(run: Run, section_id: str, catalog: Catalog, *, reviewer: str
     order = run.root / "workorders" / f"{section_id}-review.md"
     order.write_text(review_order(run, section_id, catalog.scope(run.blueprint()), reviewer=reviewer),
                      encoding="utf-8")
-    log(f"[{section_id}] 交叉審題派給 {reviewer}（{thread}）")
-    agora.assign(thread, reviewer, order)
+    if not agora.is_active(thread):
+        log(f"[{section_id}] 交叉審題派給 {reviewer}（{thread}）")
+        agora.assign(thread, reviewer, order)
     agora.wait(thread)
     try:
         review = ReviewFile.model_validate_json(run.review_path(section_id).read_text(encoding="utf-8-sig"))

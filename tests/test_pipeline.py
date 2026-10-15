@@ -75,7 +75,8 @@ class PipelineTests(unittest.TestCase):
             orders.append(order.read_text(encoding="utf-8"))
             self.run.batch_path("words").write_text(json.dumps(deliveries[len(orders) - 1]), encoding="utf-8")
 
-        patches = {"new_thread": lambda topic: "thread-1", "assign": fake_assign, "wait": lambda t: "done"}
+        patches = {"new_thread": lambda topic: "thread-1", "assign": fake_assign, "wait": lambda t: "done",
+                   "is_active": lambda t: False}
         originals = {k: getattr(agora, k) for k in patches}
         try:
             for k, v in patches.items():
