@@ -1,0 +1,820 @@
+{
+  "id": "hanlin-b3-u3",
+  "publisher": "翰林（佳音）",
+  "volume": 3,
+  "unit": 3,
+  "title": "Mom Was Doing the Dishes at Half Past Twelve",
+  "academic_year": "115",
+  "completeness": "complete",
+  "sources": [
+    {
+      "id": "handout",
+      "filename": "textbooks/jiayin\\115八上翰將英語{學用}(浮)_115上_81-114.pdf",
+      "pdf_page": 1,
+      "printed_page": "81-82",
+      "usage_terms": "電子檔授權僅至115上學期止，不得轉介複印使用"
+    },
+    {
+      "id": "guide",
+      "filename": "textbooks\\115 iE3 備課用書2-u3(115f250748).pdf",
+      "pdf_page": 37,
+      "printed_page": "66-2",
+      "usage_terms": "電子檔授權僅至115上學期止，不得轉介複印使用"
+    }
+  ],
+  "vocab": [
+    {
+      "id": "u3-v1-someone",
+      "headword": "someone",
+      "pos": ["pron."],
+      "senses": [
+        {
+          "id": "u3-v1-s1",
+          "meaning_zh": "某人",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v2-break",
+      "headword": "break",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u3-v2-s1",
+          "meaning_zh": "打破",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v2-s2",
+          "meaning_zh": "損壞",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v3-do-the-dishes",
+      "headword": "do the dishes",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u3-v3-s1",
+          "meaning_zh": "洗碗盤",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v4-half",
+      "headword": "half",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-v4-s1",
+          "meaning_zh": "一半",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v4-s2",
+          "meaning_zh": "二分之一",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v5-past",
+      "headword": "past",
+      "pos": ["prep.", "adv.", "adj.", "n."],
+      "senses": [
+        {
+          "id": "u3-v5-s1",
+          "meaning_zh": "經過",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v5-s2",
+          "meaning_zh": "過去（的）",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v6-leave",
+      "headword": "leave",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u3-v6-s1",
+          "meaning_zh": "離開",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v7-quarter",
+      "headword": "quarter",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-v7-s1",
+          "meaning_zh": "十五分鐘",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v7-s2",
+          "meaning_zh": "四分之一",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v8-remember",
+      "headword": "remember",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u3-v8-s1",
+          "meaning_zh": "記得",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v9-take-it-easy",
+      "headword": "take it easy",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u3-v9-s1",
+          "meaning_zh": "放輕鬆",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v10-cool-down",
+      "headword": "cool down",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u3-v10-s1",
+          "meaning_zh": "冷靜一下",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v11-close",
+      "headword": "close",
+      "pos": ["adj."],
+      "senses": [
+        {
+          "id": "u3-v11-s1",
+          "meaning_zh": "靠近的",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v12-feed",
+      "headword": "feed",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u3-v12-s1",
+          "meaning_zh": "餵養",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v13-pet",
+      "headword": "pet",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-v13-s1",
+          "meaning_zh": "寵物",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v14-sweep",
+      "headword": "sweep",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u3-v14-s1",
+          "meaning_zh": "掃",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v15-floor",
+      "headword": "floor",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-v15-s1",
+          "meaning_zh": "地板",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v15-s2",
+          "meaning_zh": "樓層",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v16-fix",
+      "headword": "fix",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u3-v16-s1",
+          "meaning_zh": "修理",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v16-s2",
+          "meaning_zh": "解決",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v17-drawer",
+      "headword": "drawer",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-v17-s1",
+          "meaning_zh": "抽屜",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v18-mop",
+      "headword": "mop",
+      "pos": ["v.", "n."],
+      "senses": [
+        {
+          "id": "u3-v18-s1",
+          "meaning_zh": "拖地",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v18-s2",
+          "meaning_zh": "拖把",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v19-stairs",
+      "headword": "stairs",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-v19-s1",
+          "meaning_zh": "樓梯",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v20-wipe",
+      "headword": "wipe",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u3-v20-s1",
+          "meaning_zh": "擦拭",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v21-window",
+      "headword": "window",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-v21-s1",
+          "meaning_zh": "窗戶",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v22-dry",
+      "headword": "dry",
+      "pos": ["v.", "adj."],
+      "senses": [
+        {
+          "id": "u3-v22-s1",
+          "meaning_zh": "（使）乾燥",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v22-s2",
+          "meaning_zh": "乾的",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v23-hang",
+      "headword": "hang",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u3-v23-s1",
+          "meaning_zh": "吊",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v23-s2",
+          "meaning_zh": "掛",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v24-clothes",
+      "headword": "clothes",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-v24-s1",
+          "meaning_zh": "衣服",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v25-move",
+      "headword": "move",
+      "pos": ["v.", "n."],
+      "senses": [
+        {
+          "id": "u3-v25-s1",
+          "meaning_zh": "搬遷",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v25-s2",
+          "meaning_zh": "移動",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v26-city",
+      "headword": "city",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-v26-s1",
+          "meaning_zh": "城市",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v27-dream",
+      "headword": "dream",
+      "pos": ["n.", "v.", "adj."],
+      "senses": [
+        {
+          "id": "u3-v27-s1",
+          "meaning_zh": "夢",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v27-s2",
+          "meaning_zh": "夢想（的）",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v28-almost",
+      "headword": "almost",
+      "pos": ["adv."],
+      "senses": [
+        {
+          "id": "u3-v28-s1",
+          "meaning_zh": "幾乎",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v29-fall-asleep",
+      "headword": "fall asleep",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u3-v29-s1",
+          "meaning_zh": "睡著",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v30-scared",
+      "headword": "scared",
+      "pos": ["adj."],
+      "senses": [
+        {
+          "id": "u3-v30-s1",
+          "meaning_zh": "害怕的",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v31-problem",
+      "headword": "problem",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-v31-s1",
+          "meaning_zh": "問題",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v32-tip",
+      "headword": "tip",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-v32-s1",
+          "meaning_zh": "訣竅",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v33-however",
+      "headword": "however",
+      "pos": ["adv."],
+      "senses": [
+        {
+          "id": "u3-v33-s1",
+          "meaning_zh": "然而",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v34-nothing",
+      "headword": "nothing",
+      "pos": ["pron."],
+      "senses": [
+        {
+          "id": "u3-v34-s1",
+          "meaning_zh": "沒什麼",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v34-s2",
+          "meaning_zh": "無事",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v34-s3",
+          "meaning_zh": "無物",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v35-catch",
+      "headword": "catch",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u3-v35-s1",
+          "meaning_zh": "捉",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v35-s2",
+          "meaning_zh": "接",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v36-through",
+      "headword": "through",
+      "pos": ["prep."],
+      "senses": [
+        {
+          "id": "u3-v36-s1",
+          "meaning_zh": "穿越",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v36-s2",
+          "meaning_zh": "從頭到尾",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v37-finally",
+      "headword": "finally",
+      "pos": ["adv."],
+      "senses": [
+        {
+          "id": "u3-v37-s1",
+          "meaning_zh": "終於",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v37-s2",
+          "meaning_zh": "最後",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v38-save",
+      "headword": "save",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u3-v38-s1",
+          "meaning_zh": "拯救",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-v39-terrible",
+      "headword": "terrible",
+      "pos": ["adj."],
+      "senses": [
+        {
+          "id": "u3-v39-s1",
+          "meaning_zh": "糟糕的",
+          "is_secondary": false
+        },
+        {
+          "id": "u3-v39-s2",
+          "meaning_zh": "可怕的",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-r-monitor",
+      "headword": "monitor",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-r-monitor-s1",
+          "meaning_zh": "監視器",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-r-sleepwalk",
+      "headword": "sleepwalk",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u3-r-sleepwalk-s1",
+          "meaning_zh": "夢遊",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-r-web",
+      "headword": "web",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-r-web-s1",
+          "meaning_zh": "網子",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u3-r-hole",
+      "headword": "hole",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u3-r-hole-s1",
+          "meaning_zh": "洞",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": ["handout"]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "u3-g1-past-continuous",
+      "name": "過去進行式",
+      "description": "以「was / were + 現在分詞（V-ing）」結構描述過去某個特定時間點正在持續進行的動作。",
+      "source_refs": ["handout", "guide"]
+    },
+    {
+      "id": "u3-g2-past-continuous-with-when",
+      "name": "過去進行式搭配 when + 過去簡單式",
+      "description": "以過去進行式表示過去某個較長或正在進行的動作，並以 when 連接過去簡單式子句表示該進行中動作被另一個短暫發生的事件打斷或切入。",
+      "source_refs": ["handout", "guide"]
+    },
+    {
+      "id": "u3-g3-telling-time-past-to",
+      "name": "時間的逆讀法",
+      "description": "以「分＋past / to＋時」的結構表達時刻，past 表示「過了幾分」，to 表示「差幾分到下一個整點」，亦可搭配 quarter 或 half 表示十五分鐘與半小時。",
+      "source_refs": ["handout", "guide"]
+    }
+  ]
+}

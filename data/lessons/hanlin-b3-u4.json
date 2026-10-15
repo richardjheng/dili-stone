@@ -1,0 +1,775 @@
+{
+  "id": "hanlin-b3-u4",
+  "publisher": "翰林（佳音）",
+  "volume": 3,
+  "unit": 4,
+  "title": "What Do You Want to Be in the Future?",
+  "academic_year": "115",
+  "completeness": "complete",
+  "sources": [
+    {
+      "id": "handout",
+      "filename": "textbooks/jiayin\\115八上翰將英語{學用}(浮)_115上_115-150.pdf",
+      "pdf_page": 1,
+      "printed_page": "115-116",
+      "usage_terms": "電子檔授權僅至115上學期止，不得轉介複印使用"
+    },
+    {
+      "id": "guide",
+      "filename": "textbooks\\115 iE3 備課用書2-u4、r2、節慶(115f312722) (1).pdf",
+      "pdf_page": 39,
+      "printed_page": "86-2",
+      "usage_terms": "電子檔授權僅至115上學期止，不得轉介複印使用"
+    }
+  ],
+  "vocab": [
+    {
+      "id": "u4-v1-hope",
+      "headword": "hope",
+      "pos": ["v.", "n."],
+      "senses": [
+        {
+          "id": "u4-v1-s1",
+          "meaning_zh": "希望",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v2-future",
+      "headword": "future",
+      "pos": ["n.", "adj."],
+      "senses": [
+        {
+          "id": "u4-v2-s1",
+          "meaning_zh": "未來（的）",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v3-plan",
+      "headword": "plan",
+      "pos": ["v.", "n."],
+      "senses": [
+        {
+          "id": "u4-v3-s1",
+          "meaning_zh": "規劃",
+          "is_secondary": false
+        },
+        {
+          "id": "u4-v3-s2",
+          "meaning_zh": "計畫",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v4-lawyer",
+      "headword": "lawyer",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v4-s1",
+          "meaning_zh": "律師",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v5-job",
+      "headword": "job",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v5-s1",
+          "meaning_zh": "工作",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v6-get-butterflies-in-ones-stomach",
+      "headword": "get butterflies in one's stomach",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u4-v6-s1",
+          "meaning_zh": "感到緊張",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v7-worry",
+      "headword": "worry",
+      "pos": ["v.", "n."],
+      "senses": [
+        {
+          "id": "u4-v7-s1",
+          "meaning_zh": "擔心",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v8-keep",
+      "headword": "keep",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u4-v8-s1",
+          "meaning_zh": "持續",
+          "is_secondary": false
+        },
+        {
+          "id": "u4-v8-s2",
+          "meaning_zh": "保持",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v9-idea",
+      "headword": "idea",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v9-s1",
+          "meaning_zh": "主意",
+          "is_secondary": false
+        },
+        {
+          "id": "u4-v9-s2",
+          "meaning_zh": "想法",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v10-right",
+      "headword": "right",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v10-s1",
+          "meaning_zh": "權利",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v11-put-on",
+      "headword": "put on",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u4-v11-s1",
+          "meaning_zh": "穿上",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v12-reporter",
+      "headword": "reporter",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v12-s1",
+          "meaning_zh": "記者",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v13-interview",
+      "headword": "interview",
+      "pos": ["v.", "n."],
+      "senses": [
+        {
+          "id": "u4-v13-s1",
+          "meaning_zh": "採訪",
+          "is_secondary": false
+        },
+        {
+          "id": "u4-v13-s2",
+          "meaning_zh": "面試",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v14-mail-carrier",
+      "headword": "mail carrier",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v14-s1",
+          "meaning_zh": "郵差",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v15-dentist",
+      "headword": "dentist",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v15-s1",
+          "meaning_zh": "牙醫",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v16-factory",
+      "headword": "factory",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v16-s1",
+          "meaning_zh": "工廠",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v17-fisherman",
+      "headword": "fisherman",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v17-s1",
+          "meaning_zh": "漁夫",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v18-secretary",
+      "headword": "secretary",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v18-s1",
+          "meaning_zh": "祕書",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v19-boss",
+      "headword": "boss",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v19-s1",
+          "meaning_zh": "老闆",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v20-salesman",
+      "headword": "salesman",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v20-s1",
+          "meaning_zh": "銷售員",
+          "is_secondary": false
+        },
+        {
+          "id": "u4-v20-s2",
+          "meaning_zh": "業務員",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v21-farmer",
+      "headword": "farmer",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v21-s1",
+          "meaning_zh": "農夫",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v22-grow",
+      "headword": "grow",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u4-v22-s1",
+          "meaning_zh": "種植",
+          "is_secondary": false
+        },
+        {
+          "id": "u4-v22-s2",
+          "meaning_zh": "成長",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v23-soldier",
+      "headword": "soldier",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v23-s1",
+          "meaning_zh": "士兵",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v24-country",
+      "headword": "country",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v24-s1",
+          "meaning_zh": "國家",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v25-truck-driver",
+      "headword": "truck driver",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v25-s1",
+          "meaning_zh": "卡車司機",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v26-drive",
+      "headword": "drive",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u4-v26-s1",
+          "meaning_zh": "開（車）",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v27-successful",
+      "headword": "successful",
+      "pos": ["adj."],
+      "senses": [
+        {
+          "id": "u4-v27-s1",
+          "meaning_zh": "成功的",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v28-find",
+      "headword": "find",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u4-v28-s1",
+          "meaning_zh": "找到",
+          "is_secondary": false
+        },
+        {
+          "id": "u4-v28-s2",
+          "meaning_zh": "發現",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v29-grade",
+      "headword": "grade",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v29-s1",
+          "meaning_zh": "年級",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v30-decide",
+      "headword": "decide",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u4-v30-s1",
+          "meaning_zh": "決定",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v31-become",
+      "headword": "become",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u4-v31-s1",
+          "meaning_zh": "成為",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v32-relative",
+      "headword": "relative",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-v32-s1",
+          "meaning_zh": "親戚",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v33-believe",
+      "headword": "believe",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u4-v33-s1",
+          "meaning_zh": "相信",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v34-act",
+      "headword": "act",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u4-v34-s1",
+          "meaning_zh": "表演",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v35-all-over",
+      "headword": "all over",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u4-v35-s1",
+          "meaning_zh": "遍及",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v36-make-fun-of",
+      "headword": "make fun of",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u4-v36-s1",
+          "meaning_zh": "取笑",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-v37-give-up",
+      "headword": "give up",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u4-v37-s1",
+          "meaning_zh": "放棄",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-r-channel",
+      "headword": "channel",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-r-channel-s1",
+          "meaning_zh": "頻道",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-r-wig",
+      "headword": "wig",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-r-wig-s1",
+          "meaning_zh": "假髮",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-r-career",
+      "headword": "career",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-r-career-s1",
+          "meaning_zh": "職業",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-r-deliver",
+      "headword": "deliver",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u4-r-deliver-s1",
+          "meaning_zh": "投遞",
+          "is_secondary": false
+        },
+        {
+          "id": "u4-r-deliver-s2",
+          "meaning_zh": "運送",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-r-success",
+      "headword": "success",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-r-success-s1",
+          "meaning_zh": "成功",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u4-r-audition",
+      "headword": "audition",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u4-r-audition-s1",
+          "meaning_zh": "試鏡",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": ["handout"]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "u4-g1-verbs-taking-infinitive-or-gerund-as-object",
+      "name": "不定詞與動名詞當動詞的受詞",
+      "description": "英語動詞依其語義與習慣接不定詞（to V）或動名詞（V-ing）作受詞，用來表達未來的計畫、意願或從事中的活動與喜好。",
+      "source_refs": ["handout", "guide"]
+    },
+    {
+      "id": "u4-g2-gerund-as-object-of-preposition",
+      "name": "動名詞當介系詞的受詞",
+      "description": "介系詞後若需接動作，須將動詞轉化為動名詞（V-ing）形式作為介系詞的受詞。",
+      "source_refs": ["handout", "guide"]
+    },
+    {
+      "id": "u4-g3-gerund-subject-and-dummy-it",
+      "name": "動名詞當主詞與虛主詞 it",
+      "description": "以動名詞片語作為句子的主詞並視為單數；亦可使用代名詞 it 作為形式上的虛主詞，將真主詞的不定詞或動名詞片語移至句尾以平衡句式。",
+      "source_refs": ["handout", "guide"]
+    }
+  ]
+}

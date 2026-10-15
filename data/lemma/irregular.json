@@ -1,0 +1,591 @@
+{
+  "description": "獨立整理的常見英語不規則詞形；只記詞形關係，不含教材原文。多重 lemma 保留供歧義檢查，非完整字典。",
+  "forms": {
+    "am": [
+      "be"
+    ],
+    "are": [
+      "be"
+    ],
+    "ate": [
+      "eat"
+    ],
+    "beat": [
+      "beat"
+    ],
+    "beaten": [
+      "beat"
+    ],
+    "became": [
+      "become"
+    ],
+    "been": [
+      "be"
+    ],
+    "began": [
+      "begin"
+    ],
+    "begun": [
+      "begin"
+    ],
+    "being": [
+      "be"
+    ],
+    "bent": [
+      "bend"
+    ],
+    "best": [
+      "good",
+      "well"
+    ],
+    "better": [
+      "good",
+      "well"
+    ],
+    "bit": [
+      "bite"
+    ],
+    "bitten": [
+      "bite"
+    ],
+    "blew": [
+      "blow"
+    ],
+    "blown": [
+      "blow"
+    ],
+    "bought": [
+      "buy"
+    ],
+    "broke": [
+      "break"
+    ],
+    "broken": [
+      "break"
+    ],
+    "brought": [
+      "bring"
+    ],
+    "built": [
+      "build"
+    ],
+    "burnt": [
+      "burn"
+    ],
+    "came": [
+      "come"
+    ],
+    "caught": [
+      "catch"
+    ],
+    "children": [
+      "child"
+    ],
+    "chose": [
+      "choose"
+    ],
+    "chosen": [
+      "choose"
+    ],
+    "cost": [
+      "cost"
+    ],
+    "could": [
+      "can"
+    ],
+    "cut": [
+      "cut"
+    ],
+    "deer": [
+      "deer"
+    ],
+    "did": [
+      "do"
+    ],
+    "does": [
+      "do"
+    ],
+    "done": [
+      "do"
+    ],
+    "drank": [
+      "drink"
+    ],
+    "drawn": [
+      "draw"
+    ],
+    "dreamt": [
+      "dream"
+    ],
+    "drew": [
+      "draw"
+    ],
+    "driven": [
+      "drive"
+    ],
+    "drove": [
+      "drive"
+    ],
+    "drunk": [
+      "drink"
+    ],
+    "dug": [
+      "dig"
+    ],
+    "eaten": [
+      "eat"
+    ],
+    "elder": [
+      "old"
+    ],
+    "eldest": [
+      "old"
+    ],
+    "fallen": [
+      "fall"
+    ],
+    "farther": [
+      "far"
+    ],
+    "farthest": [
+      "far"
+    ],
+    "fed": [
+      "feed"
+    ],
+    "feet": [
+      "foot"
+    ],
+    "fell": [
+      "fall"
+    ],
+    "felt": [
+      "feel"
+    ],
+    "fish": [
+      "fish"
+    ],
+    "flew": [
+      "fly"
+    ],
+    "flown": [
+      "fly"
+    ],
+    "forgave": [
+      "forgive"
+    ],
+    "forgiven": [
+      "forgive"
+    ],
+    "forgot": [
+      "forget"
+    ],
+    "forgotten": [
+      "forget"
+    ],
+    "fought": [
+      "fight"
+    ],
+    "found": [
+      "find"
+    ],
+    "froze": [
+      "freeze"
+    ],
+    "frozen": [
+      "freeze"
+    ],
+    "further": [
+      "far"
+    ],
+    "furthest": [
+      "far"
+    ],
+    "gave": [
+      "give"
+    ],
+    "geese": [
+      "goose"
+    ],
+    "given": [
+      "give"
+    ],
+    "gone": [
+      "go"
+    ],
+    "got": [
+      "get"
+    ],
+    "gotten": [
+      "get"
+    ],
+    "grew": [
+      "grow"
+    ],
+    "grown": [
+      "grow"
+    ],
+    "had": [
+      "have"
+    ],
+    "halves": [
+      "half"
+    ],
+    "has": [
+      "have"
+    ],
+    "heard": [
+      "hear"
+    ],
+    "held": [
+      "hold"
+    ],
+    "hid": [
+      "hide"
+    ],
+    "hidden": [
+      "hide"
+    ],
+    "hit": [
+      "hit"
+    ],
+    "hung": [
+      "hang"
+    ],
+    "hurt": [
+      "hurt"
+    ],
+    "is": [
+      "be"
+    ],
+    "kept": [
+      "keep"
+    ],
+    "knew": [
+      "know"
+    ],
+    "knives": [
+      "knife"
+    ],
+    "known": [
+      "know"
+    ],
+    "laid": [
+      "lay"
+    ],
+    "lain": [
+      "lie"
+    ],
+    "lay": [
+      "lie"
+    ],
+    "learnt": [
+      "learn"
+    ],
+    "least": [
+      "little"
+    ],
+    "leaves": [
+      "leaf"
+    ],
+    "led": [
+      "lead"
+    ],
+    "left": [
+      "leave"
+    ],
+    "lent": [
+      "lend"
+    ],
+    "less": [
+      "little"
+    ],
+    "let": [
+      "let"
+    ],
+    "lit": [
+      "light"
+    ],
+    "lives": [
+      "life"
+    ],
+    "loaves": [
+      "loaf"
+    ],
+    "lost": [
+      "lose"
+    ],
+    "made": [
+      "make"
+    ],
+    "meant": [
+      "mean"
+    ],
+    "men": [
+      "man"
+    ],
+    "met": [
+      "meet"
+    ],
+    "mice": [
+      "mouse"
+    ],
+    "might": [
+      "may"
+    ],
+    "more": [
+      "many",
+      "much"
+    ],
+    "most": [
+      "many",
+      "much"
+    ],
+    "must": [
+      "must"
+    ],
+    "oxen": [
+      "ox"
+    ],
+    "paid": [
+      "pay"
+    ],
+    "people": [
+      "person"
+    ],
+    "put": [
+      "put"
+    ],
+    "quit": [
+      "quit"
+    ],
+    "ran": [
+      "run"
+    ],
+    "rang": [
+      "ring"
+    ],
+    "read": [
+      "read"
+    ],
+    "ridden": [
+      "ride"
+    ],
+    "risen": [
+      "rise"
+    ],
+    "rode": [
+      "ride"
+    ],
+    "rose": [
+      "rise"
+    ],
+    "rung": [
+      "ring"
+    ],
+    "said": [
+      "say"
+    ],
+    "sang": [
+      "sing"
+    ],
+    "sank": [
+      "sink"
+    ],
+    "sat": [
+      "sit"
+    ],
+    "saw": [
+      "see"
+    ],
+    "scarves": [
+      "scarf"
+    ],
+    "seen": [
+      "see"
+    ],
+    "sent": [
+      "send"
+    ],
+    "set": [
+      "set"
+    ],
+    "shaken": [
+      "shake"
+    ],
+    "sheep": [
+      "sheep"
+    ],
+    "shelves": [
+      "shelf"
+    ],
+    "shone": [
+      "shine"
+    ],
+    "shook": [
+      "shake"
+    ],
+    "shot": [
+      "shoot"
+    ],
+    "should": [
+      "shall"
+    ],
+    "showed": [
+      "show"
+    ],
+    "shown": [
+      "show"
+    ],
+    "shut": [
+      "shut"
+    ],
+    "slept": [
+      "sleep"
+    ],
+    "smelt": [
+      "smell"
+    ],
+    "sold": [
+      "sell"
+    ],
+    "sought": [
+      "seek"
+    ],
+    "spelt": [
+      "spell"
+    ],
+    "spent": [
+      "spend"
+    ],
+    "spoilt": [
+      "spoil"
+    ],
+    "spoke": [
+      "speak"
+    ],
+    "spoken": [
+      "speak"
+    ],
+    "spread": [
+      "spread"
+    ],
+    "stole": [
+      "steal"
+    ],
+    "stolen": [
+      "steal"
+    ],
+    "stood": [
+      "stand"
+    ],
+    "struck": [
+      "strike"
+    ],
+    "stuck": [
+      "stick"
+    ],
+    "sung": [
+      "sing"
+    ],
+    "sunk": [
+      "sink"
+    ],
+    "swam": [
+      "swim"
+    ],
+    "swept": [
+      "sweep"
+    ],
+    "swum": [
+      "swim"
+    ],
+    "swung": [
+      "swing"
+    ],
+    "taken": [
+      "take"
+    ],
+    "taught": [
+      "teach"
+    ],
+    "teeth": [
+      "tooth"
+    ],
+    "thieves": [
+      "thief"
+    ],
+    "thought": [
+      "think"
+    ],
+    "threw": [
+      "throw"
+    ],
+    "thrown": [
+      "throw"
+    ],
+    "told": [
+      "tell"
+    ],
+    "took": [
+      "take"
+    ],
+    "tore": [
+      "tear"
+    ],
+    "torn": [
+      "tear"
+    ],
+    "understood": [
+      "understand"
+    ],
+    "was": [
+      "be"
+    ],
+    "went": [
+      "go"
+    ],
+    "were": [
+      "be"
+    ],
+    "wives": [
+      "wife"
+    ],
+    "woke": [
+      "wake"
+    ],
+    "woken": [
+      "wake"
+    ],
+    "wolves": [
+      "wolf"
+    ],
+    "women": [
+      "woman"
+    ],
+    "won": [
+      "win"
+    ],
+    "wore": [
+      "wear"
+    ],
+    "worn": [
+      "wear"
+    ],
+    "worse": [
+      "bad"
+    ],
+    "worst": [
+      "bad"
+    ],
+    "would": [
+      "will"
+    ],
+    "written": [
+      "write"
+    ],
+    "wrote": [
+      "write"
+    ]
+  }
+}

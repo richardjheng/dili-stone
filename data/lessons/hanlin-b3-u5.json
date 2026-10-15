@@ -1,0 +1,849 @@
+{
+  "id": "hanlin-b3-u5",
+  "publisher": "翰林（佳音）",
+  "volume": 3,
+  "unit": 5,
+  "title": "How Do We Go to the Hotel?",
+  "academic_year": "115",
+  "completeness": "complete",
+  "sources": [
+    {
+      "id": "handout",
+      "filename": "textbooks/jiayin\\115八上翰將英語{學用}(浮)_115上_159-194.pdf",
+      "pdf_page": 1,
+      "printed_page": "159-160",
+      "usage_terms": "電子檔授權僅至115上學期止，不得轉介複印使用"
+    },
+    {
+      "id": "guide",
+      "filename": "textbooks\\115 iE3 備課用書3-u5(115f250750).pdf",
+      "pdf_page": 37,
+      "printed_page": "112-2",
+      "usage_terms": "電子檔授權僅至115上學期止，不得轉介複印使用"
+    }
+  ],
+  "vocab": [
+    {
+      "id": "u5-v1-metro",
+      "headword": "metro",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v1-s1",
+          "meaning_zh": "捷運",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v2-lost",
+      "headword": "lost",
+      "pos": ["adj."],
+      "senses": [
+        {
+          "id": "u5-v2-s1",
+          "meaning_zh": "迷路的",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v3-map",
+      "headword": "map",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v3-s1",
+          "meaning_zh": "地圖",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v4-ask",
+      "headword": "ask",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u5-v4-s1",
+          "meaning_zh": "請求",
+          "is_secondary": false
+        },
+        {
+          "id": "u5-v4-s2",
+          "meaning_zh": "詢問",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v5-excuse-me",
+      "headword": "Excuse me.",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u5-v5-s1",
+          "meaning_zh": "（對不起）請問⋯。",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v6-straight",
+      "headword": "straight",
+      "pos": ["adv.", "adj."],
+      "senses": [
+        {
+          "id": "u5-v6-s1",
+          "meaning_zh": "直地",
+          "is_secondary": false
+        },
+        {
+          "id": "u5-v6-s2",
+          "meaning_zh": "直的",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v7-turn-left",
+      "headword": "turn left",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u5-v7-s1",
+          "meaning_zh": "向左轉",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v8-along",
+      "headword": "along",
+      "pos": ["prep."],
+      "senses": [
+        {
+          "id": "u5-v8-s1",
+          "meaning_zh": "沿著",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v9-block",
+      "headword": "block",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v9-s1",
+          "meaning_zh": "街區",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v10-corner",
+      "headword": "corner",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v10-s1",
+          "meaning_zh": "轉角",
+          "is_secondary": false
+        },
+        {
+          "id": "u5-v10-s2",
+          "meaning_zh": "角落",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v11-across-from",
+      "headword": "across from",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u5-v11-s1",
+          "meaning_zh": "在⋯的對面",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v12-supermarket",
+      "headword": "supermarket",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v12-s1",
+          "meaning_zh": "超市",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v13-ground",
+      "headword": "ground",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v13-s1",
+          "meaning_zh": "地面",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v14-sir",
+      "headword": "sir",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v14-s1",
+          "meaning_zh": "先生",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v15-on-foot",
+      "headword": "on foot",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u5-v15-s1",
+          "meaning_zh": "步行",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v16-take",
+      "headword": "take",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u5-v16-s1",
+          "meaning_zh": "搭乘（交通工具）",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v17-by",
+      "headword": "by",
+      "pos": ["prep."],
+      "senses": [
+        {
+          "id": "u5-v17-s1",
+          "meaning_zh": "搭乘",
+          "is_secondary": true
+        },
+        {
+          "id": "u5-v17-s2",
+          "meaning_zh": "藉由⋯方式",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v18-get-off",
+      "headword": "get off",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u5-v18-s1",
+          "meaning_zh": "下（車、飛機等）",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v19-get",
+      "headword": "get",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u5-v19-s1",
+          "meaning_zh": "到達",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v20-right",
+      "headword": "right",
+      "pos": ["n.", "adj.", "adv."],
+      "senses": [
+        {
+          "id": "u5-v20-s1",
+          "meaning_zh": "右邊（的）",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v21-ship",
+      "headword": "ship",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v21-s1",
+          "meaning_zh": "輪船",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v22-taxi",
+      "headword": "taxi",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v22-s1",
+          "meaning_zh": "計程車",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v23-bike",
+      "headword": "bike",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v23-s1",
+          "meaning_zh": "單車",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v24-motorcycle",
+      "headword": "motorcycle",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v24-s1",
+          "meaning_zh": "機車",
+          "is_secondary": false
+        },
+        {
+          "id": "u5-v24-s2",
+          "meaning_zh": "摩托車",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v25-scooter",
+      "headword": "scooter",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v25-s1",
+          "meaning_zh": "機車",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v26-bank",
+      "headword": "bank",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v26-s1",
+          "meaning_zh": "銀行",
+          "is_secondary": false
+        },
+        {
+          "id": "u5-v26-s2",
+          "meaning_zh": "河岸",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v27-fire-station",
+      "headword": "fire station",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v27-s1",
+          "meaning_zh": "消防局",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v28-toy",
+      "headword": "toy",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v28-s1",
+          "meaning_zh": "玩具",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v29-post-office",
+      "headword": "post office",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v29-s1",
+          "meaning_zh": "郵局",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v30-hospital",
+      "headword": "hospital",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v30-s1",
+          "meaning_zh": "醫院",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v31-pool",
+      "headword": "pool",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v31-s1",
+          "meaning_zh": "水池",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v32-go-jogging",
+      "headword": "go jogging",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u5-v32-s1",
+          "meaning_zh": "慢跑",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v33-go-sailing",
+      "headword": "go sailing",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u5-v33-s1",
+          "meaning_zh": "玩帆船",
+          "is_secondary": false
+        },
+        {
+          "id": "u5-v33-s2",
+          "meaning_zh": "航行",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v34-go-surfing",
+      "headword": "go surfing",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u5-v34-s1",
+          "meaning_zh": "衝浪",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v35-fly",
+      "headword": "fly",
+      "pos": ["v."],
+      "senses": [
+        {
+          "id": "u5-v35-s1",
+          "meaning_zh": "飛行",
+          "is_secondary": true
+        },
+        {
+          "id": "u5-v35-s2",
+          "meaning_zh": "駕駛",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v36-bus-stop",
+      "headword": "bus stop",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v36-s1",
+          "meaning_zh": "公車站",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v37-go-biking",
+      "headword": "go biking",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u5-v37-s1",
+          "meaning_zh": "騎單車",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v38-go-shopping",
+      "headword": "go shopping",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u5-v38-s1",
+          "meaning_zh": "購物",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v39-hit",
+      "headword": "hit",
+      "pos": ["v.", "n."],
+      "senses": [
+        {
+          "id": "u5-v39-s1",
+          "meaning_zh": "碰撞",
+          "is_secondary": false
+        },
+        {
+          "id": "u5-v39-s2",
+          "meaning_zh": "打擊",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v40-sound",
+      "headword": "sound",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v40-s1",
+          "meaning_zh": "聲音",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v41-bell",
+      "headword": "bell",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v41-s1",
+          "meaning_zh": "鐘",
+          "is_secondary": false
+        },
+        {
+          "id": "u5-v41-s2",
+          "meaning_zh": "鈴",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v42-experience",
+      "headword": "experience",
+      "pos": ["n.", "v."],
+      "senses": [
+        {
+          "id": "u5-v42-s1",
+          "meaning_zh": "經歷",
+          "is_secondary": false
+        },
+        {
+          "id": "u5-v42-s2",
+          "meaning_zh": "經驗",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v43-wonderful",
+      "headword": "wonderful",
+      "pos": ["adj."],
+      "senses": [
+        {
+          "id": "u5-v43-s1",
+          "meaning_zh": "美好的",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v44-play",
+      "headword": "play",
+      "pos": ["n."],
+      "senses": [
+        {
+          "id": "u5-v44-s1",
+          "meaning_zh": "戲劇",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-v45-around",
+      "headword": "around",
+      "pos": ["adv."],
+      "senses": [
+        {
+          "id": "u5-v45-s1",
+          "meaning_zh": "大約",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": ["handout"]
+    },
+    {
+      "id": "u5-r-go-sightseeing",
+      "headword": "go sightseeing",
+      "pos": ["phr."],
+      "senses": [
+        {
+          "id": "u5-r-go-sightseeing-s1",
+          "meaning_zh": "觀光",
+          "is_secondary": false
+        },
+        {
+          "id": "u5-r-go-sightseeing-s2",
+          "meaning_zh": "遊覽",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": ["handout"]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "u5-g1-asking-and-answering-modes-of-transportation",
+      "name": "詢問交通方式與回答",
+      "description": "以 How 引導的疑問句詢問前往某處的交通方式，回答時可使用「by + 交通工具」、「take a/the + 交通工具」或「on foot」等方式表達。",
+      "source_refs": ["handout", "guide"]
+    },
+    {
+      "id": "u5-g2-describing-locations-of-places",
+      "name": "描述場所的位置",
+      "description": "運用方位介系詞與介系詞片語（如 next to、across from、between... and...、on the corner of）說明目標建築物或場所的相對位置。",
+      "source_refs": ["handout", "guide"]
+    },
+    {
+      "id": "u5-g3-asking-and-giving-directions",
+      "name": "詢問及指示方向用語",
+      "description": "使用祈使句與方向詞彙（例如 Go straight、Turn left/right、on your left/right）為問路者指引前進路線與轉彎方位。",
+      "source_refs": ["handout", "guide"]
+    },
+    {
+      "id": "u5-g4-go-plus-gerund-recreation",
+      "name": "「go + 動名詞」表示從事某休閒活動",
+      "description": "以「go + V-ing」固定結構表示外出從事各類戶外休閒、運動或娛樂活動（如 go biking、go shopping 等）。",
+      "source_refs": ["handout", "guide"]
+    }
+  ]
+}

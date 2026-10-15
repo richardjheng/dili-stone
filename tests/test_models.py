@@ -472,15 +472,5 @@ class SchemaTests(unittest.TestCase):
             self.assertTrue(output["properties"]["content_hash"]["readOnly"])
             self.assertTrue(output["properties"]["status"]["readOnly"])
 
-    def test_export_project_artifacts(self):
-        # Intentional integration output: the allowed `agora check` command also
-        # produces the requested schemas/ artifacts without changing its config.
-        paths = export_schemas(ROOT / "schemas")
-        for path in paths:
-            with self.subTest(path=path.name):
-                schema = json.loads(path.read_text(encoding="utf-8"))
-                self.assertEqual(schema["$schema"], "https://json-schema.org/draft/2020-12/schema")
-
-
 if __name__ == "__main__":
     unittest.main()

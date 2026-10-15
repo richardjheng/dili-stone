@@ -1,6 +1,9 @@
 """Word output: a small hand-written exam covering every item kind and drawn figure."""
 
-import pytest
+import tempfile
+import unittest
+from pathlib import Path
+
 from docx import Document
 
 from dili.export import write_exam
@@ -103,31 +106,43 @@ def _text(path) -> str:
     return "\n".join([p.text for p in doc.paragraphs] + cells)
 
 
-def test_writes_paper_and_answer_book(tmp_path):
-    paper, answers = tmp_path / "paper.docx", tmp_path / "answers.docx"
-    write_exam(Blueprint.model_validate(BLUEPRINT), _batches(), paper, answers)
+class ExportTests(unittest.TestCase):
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self.tmp = Path(self._tmp.name)
 
-    paper_text, answer_text = _text(paper), _text(answers)
-    assert "示範國中　115 學年度第一學期　第二次段考" in paper_text
-    assert "一、單題選擇（第 1–2 題，每題 2 分，共 4 分）" in paper_text
-    assert "二、題組（第 3–8 題，每題 1.5 分，共 9 分）" in paper_text
-    assert "三、文意字彙（第 9 題，每題 1 分，共 1 分）" in paper_text
-    assert "本卷含尚未經人工確認（待審）的題目" in paper_text
-    for number in range(1, 11):
-        assert f"{number}. " in paper_text
-    assert "解析" not in paper_text and "believe" not in paper_text
-    assert "(C) 2. 【待審】" in answer_text
-    assert "解析：第 9 題答案為 believe。" in answer_text
-    assert "(B) 選項 B 不符合題意。" in answer_text
-    assert "註：tiny 很小的" in paper_text
-    assert "Fried rice" in paper_text
+    def tearDown(self):
+        self._tmp.cleanup()
 
-    pictures = Document(paper).inline_shapes
-    assert len(pictures) == 3  # Venn, route and map; the table is a native Word table
-    assert len(Document(paper).tables) == 1
+    def test_writes_paper_and_answer_book(self):
+        paper, answers = self.tmp / "paper.docx", self.tmp / "answers.docx"
+        write_exam(Blueprint.model_validate(BLUEPRINT), _batches(), paper, answers)
+
+        paper_text, answer_text = _text(paper), _text(answers)
+        self.assertIn("示範國中　115 學年度第一學期　第二次段考", paper_text)
+        self.assertIn("一、單題選擇（第 1–2 題，每題 2 分，共 4 分）", paper_text)
+        self.assertIn("二、題組（第 3–8 題，每題 1.5 分，共 9 分）", paper_text)
+        self.assertIn("三、文意字彙（第 9 題，每題 1 分，共 1 分）", paper_text)
+        self.assertIn("本卷含尚未經人工確認（待審）的題目", paper_text)
+        for number in range(1, 11):
+            self.assertIn(f"{number}. ", paper_text)
+        self.assertNotIn("解析", paper_text)
+        self.assertNotIn("believe", paper_text)
+        self.assertIn("(C) 2. 【待審】", answer_text)
+        self.assertIn("解析：第 9 題答案為 believe。", answer_text)
+        self.assertIn("(B) 選項 B 不符合題意。", answer_text)
+        self.assertIn("註：tiny 很小的", paper_text)
+        self.assertIn("Fried rice", paper_text)
+
+        document = Document(paper)
+        self.assertEqual(len(document.inline_shapes), 3)  # Venn, route, map; the table is native
+        self.assertEqual(len(document.tables), 1)
+
+    def test_missing_section_batch_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "missing batches"):
+            write_exam(Blueprint.model_validate(BLUEPRINT), _batches()[:-1],
+                       self.tmp / "p.docx", self.tmp / "a.docx")
 
 
-def test_missing_section_batch_is_rejected(tmp_path):
-    with pytest.raises(ValueError, match="missing batches"):
-        write_exam(Blueprint.model_validate(BLUEPRINT), _batches()[:-1],
-                   tmp_path / "p.docx", tmp_path / "a.docx")
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,1111 @@
+{
+  "id": "hanlin-b3-u2",
+  "publisher": "翰林（佳音）",
+  "volume": 3,
+  "unit": 2,
+  "title": "You Can Learn About Game Design After You Join the Club",
+  "academic_year": "115",
+  "completeness": "complete",
+  "sources": [
+    {
+      "id": "handout",
+      "filename": "textbooks/jiayin\\115八上翰將英語{學用}(浮)_115上_35-72.pdf",
+      "pdf_page": 1,
+      "printed_page": "35-36",
+      "usage_terms": "電子檔授權僅至115上學期止，不得轉介複印使用"
+    },
+    {
+      "id": "guide",
+      "filename": "textbooks\\115 iE3 備課用書1-u2、r1(115f312721) (1).pdf",
+      "pdf_page": 45,
+      "printed_page": "42-2",
+      "usage_terms": "電子檔授權僅至115上學期止，不得轉介複印使用"
+    }
+  ],
+  "vocab": [
+    {
+      "id": "u2-v1-club",
+      "headword": "club",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v1-s1",
+          "meaning_zh": "社團",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v2-make-up-ones-mind",
+      "headword": "make up one's mind",
+      "pos": [
+        "phr."
+      ],
+      "senses": [
+        {
+          "id": "u2-v2-s1",
+          "meaning_zh": "下定決心",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v3-interesting",
+      "headword": "interesting",
+      "pos": [
+        "adj."
+      ],
+      "senses": [
+        {
+          "id": "u2-v3-s1",
+          "meaning_zh": "有趣的",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v4-science",
+      "headword": "science",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v4-s1",
+          "meaning_zh": "科學",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v5-subject",
+      "headword": "subject",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v5-s1",
+          "meaning_zh": "學科",
+          "is_secondary": false
+        },
+        {
+          "id": "u2-v5-s2",
+          "meaning_zh": "主題",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v6-hear",
+      "headword": "hear",
+      "pos": [
+        "v."
+      ],
+      "senses": [
+        {
+          "id": "u2-v6-s1",
+          "meaning_zh": "聽見",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v7-same",
+      "headword": "same",
+      "pos": [
+        "adj."
+      ],
+      "senses": [
+        {
+          "id": "u2-v7-s1",
+          "meaning_zh": "相同的",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v8-call",
+      "headword": "call",
+      "pos": [
+        "v.",
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v8-s1",
+          "meaning_zh": "打電話",
+          "is_secondary": false
+        },
+        {
+          "id": "u2-v8-s2",
+          "meaning_zh": "呼叫",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v9-tell",
+      "headword": "tell",
+      "pos": [
+        "v."
+      ],
+      "senses": [
+        {
+          "id": "u2-v9-s1",
+          "meaning_zh": "告訴",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v10-pull-ones-leg",
+      "headword": "pull one's leg",
+      "pos": [
+        "phr."
+      ],
+      "senses": [
+        {
+          "id": "u2-v10-s1",
+          "meaning_zh": "開玩笑",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v11-poor",
+      "headword": "poor",
+      "pos": [
+        "adj."
+      ],
+      "senses": [
+        {
+          "id": "u2-v11-s1",
+          "meaning_zh": "不佳的",
+          "is_secondary": false
+        },
+        {
+          "id": "u2-v11-s2",
+          "meaning_zh": "貧窮的",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v12-end",
+      "headword": "end",
+      "pos": [
+        "n.",
+        "v."
+      ],
+      "senses": [
+        {
+          "id": "u2-v12-s1",
+          "meaning_zh": "結尾",
+          "is_secondary": false
+        },
+        {
+          "id": "u2-v12-s2",
+          "meaning_zh": "結束",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v13-whose",
+      "headword": "whose",
+      "pos": [
+        "adj.",
+        "pron."
+      ],
+      "senses": [
+        {
+          "id": "u2-v13-s1",
+          "meaning_zh": "誰的（東西）",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v14-camera",
+      "headword": "camera",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v14-s1",
+          "meaning_zh": "相機",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v15-mine",
+      "headword": "mine",
+      "pos": [
+        "pron."
+      ],
+      "senses": [
+        {
+          "id": "u2-v15-s1",
+          "meaning_zh": "我的（東西）",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v16-whats-up",
+      "headword": "What's up?",
+      "pos": [
+        "phr."
+      ],
+      "senses": [
+        {
+          "id": "u2-v16-s1",
+          "meaning_zh": "怎麼了？",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v17-when",
+      "headword": "when",
+      "pos": [
+        "conj."
+      ],
+      "senses": [
+        {
+          "id": "u2-v17-s1",
+          "meaning_zh": "當⋯",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v18-back",
+      "headword": "back",
+      "pos": [
+        "adv."
+      ],
+      "senses": [
+        {
+          "id": "u2-v18-s1",
+          "meaning_zh": "返回",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v19-sign-up",
+      "headword": "sign up",
+      "pos": [
+        "phr."
+      ],
+      "senses": [
+        {
+          "id": "u2-v19-s1",
+          "meaning_zh": "報名參加",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v20-wrong",
+      "headword": "wrong",
+      "pos": [
+        "adj."
+      ],
+      "senses": [
+        {
+          "id": "u2-v20-s1",
+          "meaning_zh": "錯誤的",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v21-hold-on",
+      "headword": "hold on",
+      "pos": [
+        "phr."
+      ],
+      "senses": [
+        {
+          "id": "u2-v21-s1",
+          "meaning_zh": "稍候",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v22-math",
+      "headword": "math",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v22-s1",
+          "meaning_zh": "數學",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v23-soccer",
+      "headword": "soccer",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v23-s1",
+          "meaning_zh": "足球",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v24-chinese",
+      "headword": "Chinese",
+      "pos": [
+        "adj.",
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v24-s1",
+          "meaning_zh": "中國的",
+          "is_secondary": false
+        },
+        {
+          "id": "u2-v24-s2",
+          "meaning_zh": "中國人",
+          "is_secondary": false
+        },
+        {
+          "id": "u2-v24-s3",
+          "meaning_zh": "中文",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v25-history",
+      "headword": "history",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v25-s1",
+          "meaning_zh": "歷史",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v26-violin",
+      "headword": "violin",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v26-s1",
+          "meaning_zh": "小提琴",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v27-robot",
+      "headword": "robot",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v27-s1",
+          "meaning_zh": "機器人",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v28-health",
+      "headword": "health",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v28-s1",
+          "meaning_zh": "健康",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v29-pe",
+      "headword": "PE",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v29-s1",
+          "meaning_zh": "體育",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v30-look-for",
+      "headword": "look for",
+      "pos": [
+        "phr."
+      ],
+      "senses": [
+        {
+          "id": "u2-v30-s1",
+          "meaning_zh": "尋找",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v31-ms",
+      "headword": "Ms.",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v31-s1",
+          "meaning_zh": "女士",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v32-engineer",
+      "headword": "engineer",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v32-s1",
+          "meaning_zh": "工程師",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v33-lesson",
+      "headword": "lesson",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v33-s1",
+          "meaning_zh": "課",
+          "is_secondary": false
+        },
+        {
+          "id": "u2-v33-s2",
+          "meaning_zh": "課程",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v34-difficult",
+      "headword": "difficult",
+      "pos": [
+        "adj."
+      ],
+      "senses": [
+        {
+          "id": "u2-v34-s1",
+          "meaning_zh": "困難的",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v35-teach",
+      "headword": "teach",
+      "pos": [
+        "v."
+      ],
+      "senses": [
+        {
+          "id": "u2-v35-s1",
+          "meaning_zh": "教導",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v36-own",
+      "headword": "own",
+      "pos": [
+        "adj.",
+        "v."
+      ],
+      "senses": [
+        {
+          "id": "u2-v36-s1",
+          "meaning_zh": "自己的",
+          "is_secondary": false
+        },
+        {
+          "id": "u2-v36-s2",
+          "meaning_zh": "擁有",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v37-finish",
+      "headword": "finish",
+      "pos": [
+        "v."
+      ],
+      "senses": [
+        {
+          "id": "u2-v37-s1",
+          "meaning_zh": "完成",
+          "is_secondary": false
+        },
+        {
+          "id": "u2-v37-s2",
+          "meaning_zh": "結束",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v38-festival",
+      "headword": "festival",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v38-s1",
+          "meaning_zh": "節慶",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v39-start",
+      "headword": "start",
+      "pos": [
+        "v.",
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v39-s1",
+          "meaning_zh": "開始",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v40-choice",
+      "headword": "choice",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v40-s1",
+          "meaning_zh": "選擇",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v41-not-at-all",
+      "headword": "not... at all",
+      "pos": [
+        "phr."
+      ],
+      "senses": [
+        {
+          "id": "u2-v41-s1",
+          "meaning_zh": "一點也不⋯",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v42-free",
+      "headword": "free",
+      "pos": [
+        "adj."
+      ],
+      "senses": [
+        {
+          "id": "u2-v42-s1",
+          "meaning_zh": "免費的",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v43-show",
+      "headword": "show",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-v43-s1",
+          "meaning_zh": "表演",
+          "is_secondary": true
+        },
+        {
+          "id": "u2-v43-s2",
+          "meaning_zh": "節目",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-v44-miss-out",
+      "headword": "miss out",
+      "pos": [
+        "phr."
+      ],
+      "senses": [
+        {
+          "id": "u2-v44-s1",
+          "meaning_zh": "錯過機會",
+          "is_secondary": true
+        }
+      ],
+      "is_phrase": true,
+      "textbook_category": "application",
+      "category_heading": "字彙篇 Vocabulary 總匯",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-r-design",
+      "headword": "design",
+      "pos": [
+        "n.",
+        "v."
+      ],
+      "senses": [
+        {
+          "id": "u2-r-design-s1",
+          "meaning_zh": "設計",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-r-swimmer",
+      "headword": "swimmer",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-r-swimmer-s1",
+          "meaning_zh": "泳者",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-r-underwater",
+      "headword": "underwater",
+      "pos": [
+        "adj.",
+        "adv."
+      ],
+      "senses": [
+        {
+          "id": "u2-r-underwater-s1",
+          "meaning_zh": "水下的",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-r-winner",
+      "headword": "winner",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-r-winner-s1",
+          "meaning_zh": "獲勝者",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-r-contest",
+      "headword": "contest",
+      "pos": [
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-r-contest-s1",
+          "meaning_zh": "競賽",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": [
+        "handout"
+      ]
+    },
+    {
+      "id": "u2-r-guest",
+      "headword": "guest",
+      "pos": [
+        "adj.",
+        "n."
+      ],
+      "senses": [
+        {
+          "id": "u2-r-guest-s1",
+          "meaning_zh": "客座的",
+          "is_secondary": false
+        },
+        {
+          "id": "u2-r-guest-s2",
+          "meaning_zh": "賓客",
+          "is_secondary": false
+        }
+      ],
+      "is_phrase": false,
+      "textbook_category": "recognition",
+      "category_heading": "認識字彙",
+      "source_refs": [
+        "handout"
+      ]
+    }
+  ],
+  "grammar": [
+    {
+      "id": "u2-g1-subordinating-conjunctions-time",
+      "name": "從屬連接詞 after、before、when 的句型",
+      "description": "使用 after、before 或 when 引導時間副詞子句表達兩件事情發生的先後順序或同時性；若從屬子句置於主要子句前，須以逗號分隔。",
+      "source_refs": [
+        "handout",
+        "guide"
+      ]
+    },
+    {
+      "id": "u2-g2-whose-possessive-pronoun",
+      "name": "以 whose 為首的疑問句及所有格代名詞",
+      "description": "以疑問詞 whose 詢問物品的所有者，答句以所有格代名詞替代「所有格＋名詞」，精簡表達所屬關係。",
+      "source_refs": [
+        "handout",
+        "guide"
+      ]
+    }
+  ]
+}
