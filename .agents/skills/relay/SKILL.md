@@ -6,7 +6,7 @@ description: 額度快用完時把工作交接給還有額度的 AI（Claude Cod
 # Relay：額度交接
 
 每次對話開始時，hook 會注入一行【額度】（Claude、Antigravity、Codex 的剩餘量與重置時間）；
-額度低於 5% 時會加上 ⚠️ 指示。隨時可執行 `python D:/github/agora/agora.py quota` 查詢。
+額度低於 5% 時會加上 ⚠️ 指示。隨時可執行 `agora quota` 查詢。
 
 ## A. 自己不足、其他 AI 足夠：交接
 
@@ -16,9 +16,9 @@ description: 額度快用完時把工作交接給還有額度的 AI（Claude Cod
    - **範圍**：允許修改的檔案或資料夾；明確寫出不能碰的部分
    - 關鍵決定與理由、已知的坑
    - 如何驗證（要跑的測試指令）
-3. 交接（若目前沒有相關討論串，先 `python D:/github/agora/agora.py new "主題"`）：
+3. 交接（若目前沒有相關討論串，先 `agora new "主題"`）：
    ```powershell
-   python D:/github/agora/agora.py assign <thread> --from antigravity --to <AI> --file <交接單路徑>
+   agora assign <thread> --from antigravity --to <AI> --file <交接單路徑>
    ```
    `--to` 用 ⚠️ 提醒裡指名的接手方（已依此專案的工作分配比例與額度挑好）；沒有提醒時可省略 `--to`，
    Agora 會在啟用的 AI 中依分配比例挑選。
@@ -27,12 +27,12 @@ description: 額度快用完時把工作交接給還有額度的 AI（Claude Cod
 ## B. 所有 AI 都不足
 
 - 若有其他 AI 比你早重置：照 A 段交接（接手程序會等 Claude 重置後才開始）。
-- 否則：把目前進度寫進討論串（`python D:/github/agora/agora.py send <thread> --from antigravity --to none --file <進度檔>`），告訴 Richard 你的重置時間，然後停止。
+- 否則：把目前進度寫進討論串（`agora send <thread> --from antigravity --to none --file <進度檔>`），告訴 Richard 你的重置時間，然後停止。
 
 ## C. 回來後收回
 
-1. `python D:/github/agora/agora.py recall <thread>`
-2. `python D:/github/agora/agora.py status <thread> --wait 900`，等接手方停在檢查點。
+1. `agora recall <thread>`
+2. `agora status <thread> --wait 900`，等接手方停在檢查點。
 3. 讀 `.agora/threads/<thread>/progress.md` 和 `git diff`，**逐項查證**接手方的改動：
    - 有沒有超出交接範圍
    - 測試是否通過

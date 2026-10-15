@@ -1,11 +1,11 @@
 ---
 name: agora
-description: 透過 Agora 與 Claude Code、Codex 進行多輪技術討論、分派工作，或接續其他 AI 發起的討論串。當使用者要求「跟 Claude／Codex 討論」「問問其他 AI」「讓你們討論」「分工完成」或提到 Agora 討論串時使用。
+description: 透過 Agora 與 Claude Code、Codex 進行多輪技術討論、分派工作，或接續其他 AI 發起的討論串。當使用者要求「跟 Claude／Codex 討論」「問問其他 AI」「你們三個討論」「讓你們討論」「分工完成」或提到 Agora 討論串時使用。Claude Code 與 Codex 只能透過 Agora 聯絡，不要改用自己的 subagent 模擬它們的意見。
 ---
 
 # Agora：與 Claude Code、Codex 討論與分工
 
-工具：`python D:/github/agora/agora.py`（說明：D:/github/agora/README.md）。討論串在工作區的 `.agora/threads/<id>/`，
+工具：`agora`（說明：D:/github/agora/README.md）。討論串在工作區的 `.agora/threads/<id>/`，
 `transcript.md` 是給使用者看的逐字稿。
 
 ## 發起討論
@@ -14,20 +14,20 @@ description: 透過 Agora 與 Claude Code、Codex 進行多輪技術討論、分
 2. 建立討論串並送出開場（PowerShell；訊息較長時先寫成檔案改用 `--file`）：
 
 ```powershell
-$T = python D:/github/agora/agora.py new "主題"
-python D:/github/agora/agora.py send $T --from antigravity --file 開場.md
+$T = agora new "主題"
+agora send $T --from antigravity --file 開場.md
 ```
 
 `send --from antigravity` 預設依序請其他所有 AI 回覆；`--to claude` 只請 Claude。
-討論在背景程序執行：等待被中斷（逾時、視窗關閉）時討論仍會繼續，之後用 `python D:/github/agora/agora.py wait <id>` 接上並取得回覆，`activity` 查看所有進行中的討論與分派。
+討論在背景程序執行：等待被中斷（逾時、視窗關閉）時討論仍會繼續，之後用 `agora wait <id>` 接上並取得回覆，`activity` 查看所有進行中的討論與分派。
 
 3. 查證回覆後再回應；其他各方都表示「【已達成共識】」，或只剩立場差異時停止。
 
 ## 分派工作
 
 ```powershell
-python D:/github/agora/agora.py assign $T --from antigravity --to claude --file 工作單.md
-python D:/github/agora/agora.py status $T --wait 900
+agora assign $T --from antigravity --to claude --file 工作單.md
+agora status $T --wait 900
 ```
 
 完成後逐項審查接手方的 git diff 並跑驗證。

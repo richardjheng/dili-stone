@@ -1,11 +1,13 @@
 ---
 name: agora
-description: 透過 Agora 與 Antigravity、Codex 進行多輪技術討論、分派工作，或接續其他 AI 發起的討論串。當使用者要求「跟 Antigravity／Codex 討論」「問問其他 AI」「讓你們討論」「分工完成」或提到 Agora 討論串時使用。
+description: 透過 Agora 與 Antigravity（Gemini）、Codex 進行多輪技術討論、分派工作，或接續其他 AI 發起的討論串。當使用者要求「跟 Antigravity／Gemini／Codex 討論」「問問其他 AI」「你們三個討論」「讓你們討論」「分工完成」或提到 Agora 討論串時使用。Codex 與 Antigravity 只能透過 Agora 聯絡；Claude Code 內建的 ListAgents、SendMessage 只找得到其他 Claude 工作階段，找不到它們不代表無法聯絡，不要因此改派 subagent 代替。
 ---
 
 # Agora：與 Antigravity、Codex 討論與分工
 
-工具：`python D:/github/agora/agora.py`（說明：D:/github/agora/README.md）。討論串在工作區的 `.agora/threads/<id>/`，
+> Codex 與 Antigravity（Gemini）是本機上的其他 CLI，只能透過下面的 Agora 指令聯絡。Claude Code 內建的 ListAgents／SendMessage 只會列出其他 Claude 工作階段，用它們找不到 Codex 或 Antigravity 是正常的；使用者要求它們參與時，直接用 Agora，不要改用 subagent 模擬它們的意見。
+
+工具：`agora`（說明：D:/github/agora/README.md）。討論串在工作區的 `.agora/threads/<id>/`，
 `transcript.md` 是給使用者看的逐字稿。工作區預設為目前資料夾的 git 根目錄。
 
 ## 發起討論
@@ -14,14 +16,14 @@ description: 透過 Agora 與 Antigravity、Codex 進行多輪技術討論、分
 2. 建立討論串並送出開場（預設為此專案啟用的 AI，見 `agora.py parties`；`--parties claude,codex` 可再縮小範圍）：
 
 ```bash
-T=$(python D:/github/agora/agora.py new "主題")
-python D:/github/agora/agora.py send "$T" --from claude <<'EOF'
+T=$(agora new "主題")
+agora send "$T" --from claude <<'EOF'
 開場：背景、你的立場、具體想請對方回應的問題（引用 檔案:行號）
 EOF
 ```
 
 `send --from claude` 預設依序請其他所有 AI 回覆；`--to codex` 只請 Codex。每次呼叫可能需要數分鐘，Bash timeout 設 600000。
-討論在背景程序執行：等待被中斷（逾時、視窗關閉）時討論仍會繼續，之後用 `python D:/github/agora/agora.py wait <id>` 接上並取得回覆，`activity` 查看所有進行中的討論與分派。
+討論在背景程序執行：等待被中斷（逾時、視窗關閉）時討論仍會繼續，之後用 `agora wait <id>` 接上並取得回覆，`activity` 查看所有進行中的討論與分派。
 
 3. 查證回覆中的論點後再回應。預設最多 4 來回；其他各方都表示「【已達成共識】」，或只剩立場差異時停止。
 
@@ -30,8 +32,8 @@ EOF
 討論出分工後，把工作單（範圍、不能碰的檔案、驗收方式）寫成檔案再分派：
 
 ```bash
-python D:/github/agora/agora.py assign "$T" --from claude --to codex --file 工作單.md
-python D:/github/agora/agora.py status "$T" --wait 900     # 等它完成（可用 run_in_background）
+agora assign "$T" --from claude --to codex --file 工作單.md
+agora status "$T" --wait 900     # 等它完成（可用 run_in_background）
 ```
 
 接手方在背景執行，只能在範圍內改檔、不能 commit。完成後**逐項審查它的 git diff**、跑驗證，再由你 commit。
