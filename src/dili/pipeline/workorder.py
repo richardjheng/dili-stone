@@ -152,3 +152,30 @@ def review_order(run: Run, section_id: str, lessons: list[Lesson], *, reviewer: 
 ## 範圍文法
 {_grammar_table(lessons)}
 """
+
+
+def revision_order(run: Run, section_id: str, lessons: list[Lesson], *, worker: str, findings) -> str:
+    """Send the cross-review findings back to the writer of the section."""
+    blueprint = run.blueprint()
+    section = next(s for s in blueprint.sections if s.id == section_id)
+    notes = "\n".join(f"- `{f.object_id}`（{f.severity}）：{f.notes}" for f in findings)
+    return f"""# 修題工作單：{blueprint.exam.title}・{section.title}（{run.id}）
+
+另一位老師審查了你出的 `{run.batch_path(section_id).as_posix()}`，意見如下。請**直接修改這個檔案**：
+
+{notes}
+
+## 修改原則
+- `major` 一定要修；`minor` 原則上照建議修，不同意的請在交付回報中說明理由。
+- 涉及其他大題的問題（例如洩漏其他大題的答案），**只改你這個檔案**，讓兩題不再互相提示。
+- 沒被點名的題目不要改；題號、題數、section_id 不變。
+- 修改後的解析要跟著更新。
+- 規則同出題工作單：原創、只用範圍內考點、範圍外的字附 `glossed`、人名只用 `data/lemma/names.txt`。
+
+## 交付
+- 改完執行 `agora build`，直到沒有錯誤。
+- 不要修改其他任何檔案，不要 commit。
+
+## 範圍文法
+{_grammar_table(lessons)}
+"""

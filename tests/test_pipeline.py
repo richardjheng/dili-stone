@@ -103,6 +103,28 @@ class PipelineTests(unittest.TestCase):
         flags = steps.ai_review_flags([reviewed])
         self.assertEqual([w.item_id for w in flags.warnings], ["w46"])
 
+    def test_revise_returns_findings_to_writer_and_retires_old_review(self):
+        self.run.batch_path("words").write_text(json.dumps(self.words_batch()), encoding="utf-8")
+        self.run.update_section("words", thread="thread-1")
+        self.run.review_path("words").write_text(json.dumps({"reviewer": "antigravity", "findings": [
+            {"object_id": "w46", "severity": "major", "notes": "答案不唯一。"},
+            {"object_id": "w47", "severity": "ok", "notes": "沒問題。"}]}), encoding="utf-8")
+        orders = []
+        patches = {"assign": lambda t, w, o: orders.append(o.read_text(encoding="utf-8")),
+                   "wait": lambda t: "done", "is_active": lambda t: False}
+        originals = {k: getattr(agora, k) for k in patches}
+        try:
+            for k, v in patches.items():
+                setattr(agora, k, v)
+            self.assertTrue(steps.revise_section(self.run, "words", self.catalog, log=lambda *_: None))
+        finally:
+            for k, v in originals.items():
+                setattr(agora, k, v)
+        self.assertIn("`w46`（major）：答案不唯一。", orders[0])
+        self.assertNotIn("w47", orders[0])
+        self.assertFalse(self.run.review_path("words").exists())
+        self.assertEqual(self.run.state()["sections"]["words"]["review_status"], "revised")
+
     def test_reviewer_must_differ_from_writer(self):
         self.run.batch_path("words").write_text(json.dumps(self.words_batch()), encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "出題以外"):

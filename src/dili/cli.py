@@ -15,7 +15,8 @@ def main(argv=None):
     plan.add_argument("blueprint", type=Path)
     plan.add_argument("--run", required=True, help="出卷 ID，例如 b3-term2-a")
     for name, help_text in (("generate", "經 Agora 派工出題，交付後自動檢核，有錯就帶著錯誤重派"),
-                            ("review", "請另一個 AI 交叉審題，意見附加為 AI 審核紀錄")):
+                            ("review", "請另一個 AI 交叉審題，意見附加為 AI 審核紀錄"),
+                            ("revise", "把審題意見交回出題者修改，改完重新檢核")):
         step = commands.add_parser(name, help=help_text)
         step.add_argument("run")
         step.add_argument("--section", action="append", help="只處理指定大題（可重複）")
@@ -82,6 +83,9 @@ def _pipeline(args) -> int:
         return 0 if all(results) else 1
     if args.command == "review":
         results = [pipeline.review_section(run, s, catalog, reviewer=args.worker) for s in sections]
+        return 0 if all(results) else 1
+    if args.command == "revise":
+        results = [pipeline.revise_section(run, s, catalog, worker=args.worker) for s in sections]
         return 0 if all(results) else 1
     if args.command == "build":
         return 0 if pipeline.build_run(run, catalog, force=args.force) else 1

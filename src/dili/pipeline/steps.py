@@ -14,7 +14,7 @@ from dili.models.common import Id, Model, Text
 from . import agora
 from .plan import allocate
 from .runs import Catalog, Run
-from .workorder import generation_order, review_order
+from .workorder import generation_order, review_order, revision_order
 
 # Whole-exam findings that only make sense once every section has been delivered.
 WHOLE_EXAM_CODES = {"section_batch_count", "numbering", "total_points"}
@@ -131,6 +131,39 @@ def review_section(run: Run, section_id: str, catalog: Catalog, *, reviewer: str
     majors = sum(f.severity == "major" for f in review.findings)
     run.update_section(section_id, review_status="reviewed", review_majors=majors)
     log(f"[{section_id}] 審題完成：{len(review.findings)} 筆，其中 major {majors} 筆")
+    return True
+
+
+def revise_section(run: Run, section_id: str, catalog: Catalog, *, worker: str | None = None,
+                   log=print) -> bool:
+    """Return the non-ok review findings to the writer; the old review no longer matches the content."""
+    entry = run.state()["sections"][section_id]
+    worker = worker or entry["worker"]
+    review = ReviewFile.model_validate_json(run.review_path(section_id).read_text(encoding="utf-8-sig"))
+    findings = [f for f in review.findings if f.severity != "ok"]
+    if not findings:
+        log(f"[{section_id}] 審題沒有需要修改的意見")
+        return True
+    thread = entry["thread"]
+    order = run.root / "workorders" / f"{section_id}-revise.md"
+    order.write_text(revision_order(run, section_id, catalog.scope(run.blueprint()), worker=worker,
+                                    findings=findings), encoding="utf-8")
+    if not agora.is_active(thread):
+        log(f"[{section_id}] 修題派給 {worker}（{thread}），共 {len(findings)} 筆意見")
+        run.update_section(section_id, review_status="revising")
+        agora.assign(thread, worker, order)
+    agora.wait(thread)
+    report = validate_section(run, section_id, catalog)
+    log(f"[{section_id}] 修題後{report.render().splitlines()[0]}")
+    if report.errors:
+        run.update_section(section_id, review_status="revise_failed")
+        return False
+    # Keep the review for the record, but stop using its notes: they describe the old content.
+    reviewed = run.reviewed_path(section_id)
+    if reviewed.exists():
+        reviewed.replace(reviewed.with_suffix(".before-revision.json"))
+    run.review_path(section_id).replace(run.review_path(section_id).with_suffix(".before-revision.json"))
+    run.update_section(section_id, review_status="revised", review_thread=None)
     return True
 
 
