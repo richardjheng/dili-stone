@@ -200,7 +200,8 @@ def check_exam(blueprint: Blueprint, batches, *, lessons, wordlist: WordList,
                         report.add("errors", "letter_hint_mismatch", f"{name} 提示 {hint} 與答案不一致。", obj=item, words=[answer])
         if item.status == "pending":
             report.add("infos", "pending", "題目待人工審核。", obj=item)
-    _similarities(combinations(items, 2), report, similarity_threshold)
+    # A cloze sub-item's stem is boilerplate ("blank 26"); its content is the passage.
+    _similarities(combinations([i for i in items if i.kind != "cloze"], 2), report, similarity_threshold)
     target_items = {}
     for item in items:
         for target in (*item.targets.vocab_ids, *item.targets.grammar_ids):

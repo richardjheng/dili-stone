@@ -270,6 +270,12 @@ class ExamTests(unittest.TestCase):
         found = {w for e in check([q]).errors if e.code == "out_of_scope" for w in e.words}
         self.assertEqual(found, {"quokka", "yak", "zebra"})
 
+    def test_cloze_boilerplate_stems_are_not_duplicates(self):
+        group = dict(id="g", section_id="s", kind="cloze", instruction="the cat", passage="the {{1}} and {{2}}",
+                     items=[item(n, kind="cloze", stem=f"the cat {n}") for n in (1, 2)])
+        report = check(batches=[batch([], groups=[group])], bp=blueprint(2, kind="cloze"))
+        self.assertNotIn("similar_stem", codes(report, "warnings"))
+
     def test_letter_hint_blanks_are_not_words(self):
         report = check([item(kind="word_in_context", stem="the cat b______e and the l____r ______")])
         self.assertNotIn("out_of_scope", codes(report))
