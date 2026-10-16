@@ -212,11 +212,12 @@ def _group(doc, group: Group, *, answer_book: bool) -> None:
     if answer_book and group.status == "pending":
         _set_font(paragraph.add_run("【待審】"), bold=True)
     _paragraph(doc, group.instruction, size=11, keep=True)
-    if group.figure is not None:
-        _figure(doc, group.figure)
+    # The passage sets the scene, so it comes before the figure it refers to.
     for line in (group.passage or "").splitlines():
         if line.strip():
-            _add_runs(_paragraph(doc, indent=0.4), line.strip())
+            _add_runs(_paragraph(doc, indent=0.4, keep=group.figure is not None), line.strip())
+    if group.figure is not None:
+        _figure(doc, group.figure)
     _glosses(doc, group.glossed)
     for item in group.items:
         _question(doc, item, in_group=True, answer_book=answer_book)
