@@ -19,7 +19,7 @@ LATIN_FONT = "Times New Roman"
 CJK_FONT = "標楷體"
 NUMERALS = "一二三四五六七八九十"
 CHOICE_KINDS = {"single_choice", "cloze", "reading"}
-FIGURE_WIDTH_CM = {"venn": 9, "route": 12, "street_map": 12}
+FIGURE_WIDTH_CM = {"venn": 9, "route": 12, "street_map": 10}
 BLANK = "　　"
 
 
@@ -139,6 +139,10 @@ def _choices(doc, item: Item, indent: float, first_line=None) -> None:
         for k in range(per_line):
             stops.add_tab_stop(Cm(indent + width * k / per_line))
         _add_runs(paragraph, text + "\t".join(options[start:start + per_line]))
+    if first_line is not None and per_line == 4:
+        # Everything fits on the numbered line; chaining it to the next question would
+        # glue whole groups together and leave half-empty pages.
+        first_line.paragraph_format.keep_with_next = None
 
 
 def _figure(doc, figure) -> None:
