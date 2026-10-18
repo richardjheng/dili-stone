@@ -29,6 +29,7 @@ def main(argv=None):
     feedback = commands.add_parser("feedback", help="把已完成的閱卷意見交回出題者修題")
     feedback.add_argument("run")
     feedback.add_argument("--section", action="append")
+    feedback.add_argument("--to", dest="worker", help="改派給 claude、codex 或 antigravity 修題")
     build = commands.add_parser("build", help="整卷檢核並輸出試題卷與答案解析卷")
     build.add_argument("run")
     build.add_argument("--force", action="store_true", help="有錯誤也輸出 Word")
@@ -106,9 +107,15 @@ def _pipeline(args) -> int:
             batch = run.load_batch(section_id)
             hashes = {x.id: x.content_hash for x in (*batch.groups, *batch.all_items())} if batch else {}
             found = findings_for(run, hashes)
-            print(f"[{section_id}] 閱卷意見 {len(found)} 筆")
+            # Checker errors on the same objects (e.g. 800-list words without a gloss) go along too.
+            from dili.review.store import HumanFinding
+            report = pipeline.validate_section(run, section_id, catalog)
+            found += [HumanFinding(e.item_id, "程式檢核", f"{e.message}（{'、'.join(dict.fromkeys(e.words))}）")
+                      for e in report.errors if e.item_id]
+            print(f"[{section_id}] 閱卷意見與檢核錯誤 {len(found)} 筆")
             if found:
-                results.append(pipeline.revise_section(run, section_id, catalog, findings=found))
+                results.append(pipeline.revise_section(run, section_id, catalog, findings=found,
+                                                       worker=args.worker))
         return 0 if all(results) else 1
     if args.command == "build":
         return 0 if pipeline.build_run(run, catalog, force=args.force) else 1
