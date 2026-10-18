@@ -8,7 +8,7 @@ import re
 
 from dili.models import Batch, Blueprint, Lesson, WordList
 
-from .lexicon import LAYER_ORDER, Lemmatizer, Lexicon, load_names, normalize
+from .lexicon import LAYER_ORDER, Lemmatizer, Lexicon, expand_headword, load_names, normalize
 from .report import Report
 
 
@@ -54,7 +54,7 @@ def item_texts(item):
     yield from figure_texts(item.figure)
 
 
-def check_text(text, lexicon, report, obj):
+def check_text(text, lexicon, report, obj, extended=frozenset()):
     # Cloze placeholders and letter-hint blanks (l______r) are markup, not words.
     text = re.sub(r"\{\{\d+\}\}", " ___ ", text)
     text = re.sub(r"[A-Za-z]*_{2,}[A-Za-z]*", " ___ ", text)
@@ -68,7 +68,11 @@ def check_text(text, lexicon, report, obj):
             report.add("warnings", "ambiguous_lemma", f"詞形跨層歧義，尚未判定通過：{detail}",
                        obj=obj, words=[match.text, *(lemma for lemma, _ in match.candidates)])
         elif match.layer == "outside":
-            report.add("errors", "out_of_scope", "超範圍生字，請附註中文或改寫。", obj=obj, words=[match.text])
+            if any(lemma in extended for lemma, _ in match.candidates):
+                message = "課綱 800 字（不在 1200 基本字內），請附註中文或改寫。"
+            else:
+                message = "超範圍生字，請附註中文或改寫。"
+            report.add("errors", "out_of_scope", message, obj=obj, words=[match.text])
         else:
             layer = min((layer for _, layer in match.candidates), key=LAYER_ORDER.get)
             label = {"scope": "本次考點字彙", "prerequisite": "先備字彙", "glossed": "已附註生字"}[layer]
@@ -157,8 +161,13 @@ def check_exam(blueprint: Blueprint, batches, *, lessons, wordlist: WordList,
 
     scope = [v for key in blueprint.scope if key in catalog for v in catalog[key].vocab]
     prerequisite = [v.headword for key in blueprint.prerequisite.lesson_ids if key in catalog for v in catalog[key].vocab]
+    extended = set()
     if wordlist.id == blueprint.prerequisite.wordlist_id:
-        prerequisite.extend(e.headword for e in wordlist.entries)
+        # Only the 1,200 basic words may appear freely; the other 800 need a gloss (Richard, 2026-10-18).
+        prerequisite.extend(e.headword for e in wordlist.entries if e.basic_1200)
+        for e in wordlist.entries:
+            if not e.basic_1200:
+                extended.update(expand_headword(e.headword)[1])
     lemmatizer = Lemmatizer(irregular_path)
     names = load_names()
 
@@ -175,14 +184,14 @@ def check_exam(blueprint: Blueprint, batches, *, lessons, wordlist: WordList,
     for group in groups:
         group_lexicon = lexicon(group.glossed)
         for text in (group.instruction, group.passage or "", *figure_texts(group.figure)):
-            check_text(text, group_lexicon, report, group)
+            check_text(text, group_lexicon, report, group, extended)
         if group.status == "pending":
             report.add("infos", "pending", "題組待人工審核。", obj=group)
     for item in items:
         group = group_for_item.get(id(item))
         item_lexicon = lexicon((*group.glossed, *item.glossed) if group else item.glossed)
         for text in item_texts(item):
-            check_text(text, item_lexicon, report, item)
+            check_text(text, item_lexicon, report, item, extended)
         if item.choices and item.targets.vocab_ids and not item.targets.grammar_ids:
             for letter, text in item.choices.model_dump().items():
                 if not item_lexicon.is_target(text):

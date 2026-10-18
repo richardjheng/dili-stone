@@ -276,6 +276,18 @@ class ExamTests(unittest.TestCase):
         report = check(batches=[batch([], groups=[group])], bp=blueprint(2, kind="cloze"))
         self.assertNotIn("similar_stem", codes(report, "warnings"))
 
+    def test_extended_800_words_need_a_gloss(self):
+        wordlist = WordList.model_validate(dict(
+            id="moe2000", metadata=dict(source_url="https://example.invalid/synthetic", version="fake",
+                                       retrieved_date="2026-10-18", usage_terms="手寫假資料", entry_count=2),
+            entries=[dict(headword="the", pos="", basic_1200=True), dict(headword="mall", pos="", basic_1200=False)]))
+        report = check([item(stem="the cat mall")], wordlist=wordlist)
+        finding = next(e for e in report.errors if e.code == "out_of_scope")
+        self.assertIn("800", finding.message)
+        glossed = check([item(stem="the cat mall", glossed=[dict(word="mall", meaning_zh="購物中心")])],
+                        wordlist=wordlist)
+        self.assertNotIn("out_of_scope", codes(glossed))
+
     def test_letter_hint_blanks_are_not_words(self):
         report = check([item(kind="word_in_context", stem="the cat b______e and the l____r ______")])
         self.assertNotIn("out_of_scope", codes(report))
