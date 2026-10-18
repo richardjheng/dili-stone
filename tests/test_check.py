@@ -158,6 +158,27 @@ class LexicalTests(unittest.TestCase):
 
 
 class ExamTests(unittest.TestCase):
+    def test_reading_vocab_targets_allow_contextual_answers_but_check_words(self):
+        def reading_report(option):
+            question = item(kind="reading", choices=dict(
+                A=option, B="a small cat", C="the dog", D="the bird"))
+            group = Group(id="g", section_id="s", kind="reading", instruction="請閱讀",
+                          passage="the cat and the dog", items=(question,))
+            return check(bp=blueprint(kind="reading"),
+                         batches=[batch([], groups=[group])])
+
+        self.assertEqual(reading_report("the small cat").errors, [])
+        report = reading_report("the quokka")
+        self.assertIn("out_of_scope", codes(report))
+        self.assertNotIn("option_not_scope", codes(report))
+
+    def test_cloze_vocab_options_still_require_in_scope_headwords(self):
+        question = item(kind="cloze", choices=dict(A="the cat", B="run", C="cat", D="dog"))
+        group = Group(id="g", section_id="s", kind="cloze", instruction="請填空",
+                      passage="the {{1}}", items=(question,))
+        report = check(bp=blueprint(kind="cloze"), batches=[batch([], groups=[group])])
+        self.assertIn("option_not_scope", codes(report))
+
     def test_clean_exam_and_report_contract(self):
         report = check()
         self.assertEqual(report.errors, [])

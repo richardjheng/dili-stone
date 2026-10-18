@@ -192,7 +192,11 @@ def check_exam(blueprint: Blueprint, batches, *, lessons, wordlist: WordList,
         item_lexicon = lexicon((*group.glossed, *item.glossed) if group else item.glossed)
         for text in item_texts(item):
             check_text(text, item_lexicon, report, item, extended)
-        if item.choices and item.targets.vocab_ids and not item.targets.grammar_ids:
+        # Reading answers can be sentences or facts from a passage/table even
+        # when their targets are vocabulary only. Their words still pass
+        # through check_text above; standalone and cloze vocabulary choices
+        # must continue to match complete in-scope headwords.
+        if item.kind != "reading" and item.choices and item.targets.vocab_ids and not item.targets.grammar_ids:
             for letter, text in item.choices.model_dump().items():
                 if not item_lexicon.is_target(text):
                     report.add("errors", "option_not_scope", f"單字考點選擇題的 {letter} 選項必須完整對應範圍內字彙／片語。",
