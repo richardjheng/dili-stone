@@ -135,12 +135,13 @@ def review_section(run: Run, section_id: str, catalog: Catalog, *, reviewer: str
 
 
 def revise_section(run: Run, section_id: str, catalog: Catalog, *, worker: str | None = None,
-                   log=print) -> bool:
-    """Return the non-ok review findings to the writer; the old review no longer matches the content."""
+                   findings=None, log=print) -> bool:
+    """Return review findings to the writer (the AI review's by default, or a human's when given)."""
     entry = run.state()["sections"][section_id]
     worker = worker or entry["worker"]
-    review = ReviewFile.model_validate_json(run.review_path(section_id).read_text(encoding="utf-8-sig"))
-    findings = [f for f in review.findings if f.severity != "ok"]
+    if findings is None:
+        review = ReviewFile.model_validate_json(run.review_path(section_id).read_text(encoding="utf-8-sig"))
+        findings = [f for f in review.findings if f.severity != "ok"]
     if not findings:
         log(f"[{section_id}] 審題沒有需要修改的意見")
         return True
@@ -162,7 +163,8 @@ def revise_section(run: Run, section_id: str, catalog: Catalog, *, worker: str |
     reviewed = run.reviewed_path(section_id)
     if reviewed.exists():
         reviewed.replace(reviewed.with_suffix(".before-revision.json"))
-    run.review_path(section_id).replace(run.review_path(section_id).with_suffix(".before-revision.json"))
+    if run.review_path(section_id).exists():
+        run.review_path(section_id).replace(run.review_path(section_id).with_suffix(".before-revision.json"))
     run.update_section(section_id, review_status="revised", review_thread=None)
     return True
 
@@ -197,7 +199,10 @@ def ai_review_flags(batches: list[Batch]) -> Report:
 
 def build_run(run: Run, catalog: Catalog, *, force: bool = False, log=print) -> bool:
     blueprint = run.blueprint()
-    batches = [b for s in blueprint.sections if (b := run.load_batch(s.id)) is not None]
+    from dili.review import attach_human, finals
+
+    reviews = finals(run)
+    batches = [attach_human(b, reviews) for s in blueprint.sections if (b := run.load_batch(s.id)) is not None]
     report = check_exam(blueprint, batches, lessons=catalog.lessons, wordlist=catalog.wordlist)
     flags = ai_review_flags(batches)
     report.warnings.extend(flags.warnings)

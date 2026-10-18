@@ -21,6 +21,14 @@ def main(argv=None):
         step.add_argument("run")
         step.add_argument("--section", action="append", help="只處理指定大題（可重複）")
         step.add_argument("--to", dest="worker", help="改派給 claude、codex 或 antigravity")
+    review_ui = commands.add_parser("review-ui", help="開啟本機閱卷網頁：每題評難易度、寫意見，可暫存與完成閱卷")
+    review_ui.add_argument("run")
+    review_ui.add_argument("--reviewer", default="Richard", help="閱卷人名稱（每人分開存）")
+    review_ui.add_argument("--port", type=int, default=8765)
+    review_ui.add_argument("--no-browser", action="store_true")
+    feedback = commands.add_parser("feedback", help="把已完成的閱卷意見交回出題者修題")
+    feedback.add_argument("run")
+    feedback.add_argument("--section", action="append")
     build = commands.add_parser("build", help="整卷檢核並輸出試題卷與答案解析卷")
     build.add_argument("run")
     build.add_argument("--force", action="store_true", help="有錯誤也輸出 Word")
@@ -86,6 +94,21 @@ def _pipeline(args) -> int:
         return 0 if all(results) else 1
     if args.command == "revise":
         results = [pipeline.revise_section(run, s, catalog, worker=args.worker) for s in sections]
+        return 0 if all(results) else 1
+    if args.command == "review-ui":
+        from dili.review import serve
+        serve(run, reviewer=args.reviewer, port=args.port, open_browser=not args.no_browser)
+        return 0
+    if args.command == "feedback":
+        from dili.review import findings_for
+        results = []
+        for section_id in sections:
+            batch = run.load_batch(section_id)
+            hashes = {x.id: x.content_hash for x in (*batch.groups, *batch.all_items())} if batch else {}
+            found = findings_for(run, hashes)
+            print(f"[{section_id}] 閱卷意見 {len(found)} 筆")
+            if found:
+                results.append(pipeline.revise_section(run, section_id, catalog, findings=found))
         return 0 if all(results) else 1
     if args.command == "build":
         return 0 if pipeline.build_run(run, catalog, force=args.force) else 1

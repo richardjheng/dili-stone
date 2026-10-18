@@ -1,0 +1,1673 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>段考閱卷系統</title>
+<style>
+  :root {
+    --bg-body: #f5f5f2;
+    --bg-card: #ffffff;
+    --bg-subcard: #fafaf8;
+    --bg-toolbar: rgba(255, 255, 255, 0.94);
+    --bg-explanation: #f4f7fb;
+    --bg-old-review: #f3f3f1;
+    --bg-passage: #fdfdfb;
+    --bg-badge: #eef2f6;
+    --bg-choice-hover: #f7f9fc;
+    --text-main: #1f2328;
+    --text-muted: #59636e;
+    --text-old: #76808c;
+    --border-color: #d8dee4;
+    --border-strong: #b6c0cc;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-soft: #eff6ff;
+    --easy-color: #15803d;
+    --easy-bg: #dcfce7;
+    --easy-border: #86efac;
+    --medium-color: #b45309;
+    --medium-bg: #fef3c7;
+    --medium-border: #fcd34d;
+    --hard-color: #b91c1c;
+    --hard-bg: #fee2e2;
+    --hard-border: #fca5a5;
+    --warn-color: #9a3412;
+    --warn-bg: #ffedd5;
+    --warn-border: #fdba74;
+    --ok-color: #166534;
+    --ok-bg: #dcfce7;
+    --ok-border: #86efac;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --font-zh: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", sans-serif;
+    --font-en: Georgia, "Times New Roman", "Segoe UI", "Microsoft JhengHei", serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg-body: #121519;
+      --bg-card: #1b2027;
+      --bg-subcard: #222831;
+      --bg-toolbar: rgba(27, 32, 39, 0.94);
+      --bg-explanation: #1e2633;
+      --bg-old-review: #252b34;
+      --bg-passage: #181d23;
+      --bg-badge: #2c3440;
+      --bg-choice-hover: #262e38;
+      --text-main: #e6edf3;
+      --text-muted: #9198a1;
+      --text-old: #8b949e;
+      --border-color: #30363d;
+      --border-strong: #484f58;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --accent-soft: #1e293b;
+      --easy-color: #4ade80;
+      --easy-bg: rgba(21, 128, 61, 0.25);
+      --easy-border: #166534;
+      --medium-color: #fbbf24;
+      --medium-bg: rgba(180, 83, 9, 0.25);
+      --medium-border: #92400e;
+      --hard-color: #f87171;
+      --hard-bg: rgba(185, 28, 28, 0.25);
+      --hard-border: #991b1b;
+      --warn-color: #fdba74;
+      --warn-bg: rgba(154, 52, 18, 0.28);
+      --warn-border: #9a3412;
+      --ok-color: #86efac;
+      --ok-bg: rgba(22, 101, 52, 0.3);
+      --ok-border: #15803d;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0 0 64px 0;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: var(--font-zh);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+
+  /* 固定工具列 */
+  .sticky-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-toolbar);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    padding: 10px 16px;
+  }
+
+  .toolbar-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .toolbar-left, .toolbar-right {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .progress-pill {
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--bg-badge);
+    border: 1px solid var(--border-color);
+    white-space: nowrap;
+  }
+
+  .progress-pill.complete {
+    background: var(--ok-bg);
+    color: var(--ok-color);
+    border-color: var(--ok-border);
+  }
+
+  .save-status {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    padding: 2px 6px;
+  }
+
+  .save-status.unsaved {
+    color: var(--medium-color);
+    font-weight: 600;
+  }
+
+  .save-status.error {
+    color: var(--hard-color);
+    font-weight: 600;
+  }
+
+  button {
+    font-family: var(--font-zh);
+    font-size: 0.92rem;
+    padding: 6px 13px;
+    border-radius: 6px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg-card);
+    color: var(--text-main);
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, transform 0.05s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    line-height: 1.4;
+  }
+
+  button:hover:not(:disabled) {
+    background: var(--bg-choice-hover);
+    border-color: var(--accent);
+  }
+
+  button:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  button.btn-primary {
+    background: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+
+  button.btn-primary:hover:not(:disabled) {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+
+  button.btn-active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* 主容器 */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 16px;
+  }
+
+  /* 通知橫幅 */
+  .banner {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .banner-finish {
+    background: var(--ok-bg);
+    color: var(--ok-color);
+    border-color: var(--ok-border);
+    font-weight: 700;
+    font-size: 1.02rem;
+  }
+
+  .banner-restore {
+    background: var(--warn-bg);
+    color: var(--warn-color);
+    border-color: var(--warn-border);
+  }
+
+  .banner-error {
+    background: var(--hard-bg);
+    color: var(--hard-color);
+    border-color: var(--hard-border);
+    font-weight: 600;
+  }
+
+  /* 考卷卷頭 */
+  .exam-header {
+    background: var(--bg-card);
+    border: 2px solid var(--border-strong);
+    border-radius: 10px;
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .exam-title {
+    margin: 0 0 8px 0;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+
+  .exam-subtitle {
+    margin: 0 0 12px 0;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+  }
+
+  .exam-meta {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    font-size: 0.95rem;
+    padding: 4px 14px;
+    border-radius: 6px;
+    background: var(--bg-badge);
+  }
+
+  /* 大題區塊 */
+  .exam-part {
+    margin-bottom: 32px;
+  }
+
+  .part-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 14px 0;
+    padding: 10px 14px;
+    background: var(--bg-card);
+    border-left: 5px solid var(--accent);
+    border-radius: 4px 8px 8px 4px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* 題目與題組卡片 */
+  .entry-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+    scroll-margin-top: 76px;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .entry-card.highlight-focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+  }
+
+  .group-card {
+    border: 2px solid var(--border-strong);
+    padding: 20px;
+  }
+
+  .group-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .group-range {
+    font-size: 1.12rem;
+    font-weight: 700;
+  }
+
+  .group-instruction {
+    font-size: 1.04rem;
+    font-family: var(--font-en);
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  .passage-box {
+    background: var(--bg-passage);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-family: var(--font-en);
+    font-size: 1.14rem;
+    line-height: 1.85;
+    white-space: pre-wrap;
+  }
+
+  .cloze-blank {
+    display: inline-block;
+    min-width: 3.2em;
+    text-align: center;
+    border-bottom: 2px solid var(--text-main);
+    font-weight: 700;
+    padding: 0 6px;
+    margin: 0 3px;
+    line-height: 1.3;
+  }
+
+  /* 圖表 */
+  .figure-box {
+    margin: 14px 0;
+    padding: 14px;
+    background: var(--bg-subcard);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .figure-title {
+    font-weight: 700;
+    font-size: 1.02rem;
+    margin-bottom: 10px;
+  }
+
+  .figure-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  .figure-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-en);
+    font-size: 1.02rem;
+    text-align: left;
+  }
+
+  .figure-table th,
+  .figure-table td {
+    border: 1px solid var(--border-strong);
+    padding: 8px 12px;
+  }
+
+  .figure-table thead th {
+    background: var(--bg-badge);
+    font-weight: 700;
+  }
+
+  .figure-table tbody th {
+    background: var(--bg-subcard);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  /* 小字典註解 */
+  .glossed-box {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 0.94rem;
+    padding: 6px 12px;
+    margin: 8px 0;
+    border: 1px dashed var(--border-strong);
+    border-radius: 6px;
+    background: var(--bg-subcard);
+  }
+
+  .glossed-item {
+    white-space: nowrap;
+  }
+
+  .glossed-word {
+    font-family: var(--font-en);
+    font-weight: 700;
+  }
+
+  /* 題組內子題容器 */
+  .group-items {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .group-items .entry-card {
+    margin-bottom: 0;
+    background: var(--bg-subcard);
+  }
+
+  /* 單題內容 */
+  .item-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .item-number {
+    font-weight: 700;
+    font-size: 1.14rem;
+    min-width: 2.1em;
+    flex-shrink: 0;
+  }
+
+  .item-main {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .item-stem {
+    font-family: var(--font-en);
+    font-size: 1.14rem;
+    line-height: 1.75;
+    white-space: pre-wrap;
+    margin-bottom: 8px;
+  }
+
+  .item-instruction {
+    display: inline-block;
+    font-size: 0.93rem;
+    color: var(--text-muted);
+    background: var(--bg-badge);
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+
+  /* 選項格線 */
+  .choices-grid {
+    display: grid;
+    gap: 8px 16px;
+    margin: 10px 0 6px 0;
+    font-family: var(--font-en);
+    font-size: 1.1rem;
+  }
+
+  .choices-grid.cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .choices-grid.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .choices-grid.cols-1 {
+    grid-template-columns: 1fr;
+  }
+
+  .choice-cell {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 4px 6px;
+    border-radius: 4px;
+  }
+
+  .choice-label {
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* 舊意見提示（content_hash 已變更） */
+  .stale-review-notice {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    background: var(--bg-old-review);
+    border-left: 4px solid var(--border-strong);
+    color: var(--text-old);
+    font-size: 0.92rem;
+  }
+
+  .stale-review-title {
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .stale-review-content {
+    white-space: pre-wrap;
+  }
+
+  /* 評分列 */
+  .review-controls {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .review-top-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .diff-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .diff-label {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin-right: 2px;
+  }
+
+  .diff-btn {
+    padding: 4px 12px;
+    font-size: 0.9rem;
+    border-radius: 999px;
+  }
+
+  .diff-btn[data-diff="hard"].selected {
+    background: var(--hard-bg);
+    color: var(--hard-color);
+    border-color: var(--hard-border);
+    font-weight: 700;
+  }
+
+  .diff-btn[data-diff="medium"].selected {
+    background: var(--medium-bg);
+    color: var(--medium-color);
+    border-color: var(--medium-border);
+    font-weight: 700;
+  }
+
+  .diff-btn[data-diff="easy"].selected {
+    background: var(--easy-bg);
+    color: var(--easy-color);
+    border-color: var(--easy-border);
+    font-weight: 700;
+  }
+
+  .comment-input {
+    width: 100%;
+    min-height: 54px;
+    resize: vertical;
+    padding: 8px 11px;
+    border-radius: 6px;
+    border: 1px solid var(--border-strong);
+    background: var(--bg-card);
+    color: var(--text-main);
+    font-family: var(--font-zh);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .comment-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+  }
+
+  /* 答案與解析 */
+  .explanation-panel {
+    margin-top: 10px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: var(--bg-explanation);
+    border: 1px solid var(--border-color);
+    font-size: 0.95rem;
+  }
+
+  .explanation-panel[hidden] {
+    display: none;
+  }
+
+  .ans-line {
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-size: 1rem;
+  }
+
+  .exp-section {
+    margin-top: 6px;
+  }
+
+  .exp-distractors {
+    margin: 6px 0 0 0;
+    padding-left: 20px;
+  }
+
+  .exp-distractors li {
+    margin-bottom: 3px;
+  }
+
+  .ai-notes-box {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .ai-notes-box ul {
+    margin: 4px 0 0 0;
+    padding-left: 20px;
+  }
+
+  /* 對話框 Modal */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .modal-backdrop[hidden] {
+    display: none;
+  }
+
+  .modal-dialog {
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    border-radius: 10px;
+    max-width: 440px;
+    width: 100%;
+    padding: 20px 22px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .modal-title {
+    margin: 0 0 10px 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  .modal-message {
+    margin: 0 0 18px 0;
+    color: var(--text-main);
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  /* 響應式：手機寬度 */
+  @media (max-width: 680px) {
+    .choices-grid.cols-4,
+    .choices-grid.cols-2 {
+      grid-template-columns: 1fr;
+    }
+
+    .entry-card {
+      padding: 14px;
+    }
+
+    .exam-title {
+      font-size: 1.3rem;
+    }
+
+    .toolbar-inner {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .toolbar-left, .toolbar-right {
+      justify-content: space-between;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="sticky-toolbar">
+  <div class="toolbar-inner">
+    <div class="toolbar-left">
+      <span id="progress-badge" class="progress-pill">已評 0／0</span>
+      <button type="button" id="btn-next-unrated">跳到下一個未評</button>
+      <button type="button" id="btn-toggle-all-ans" aria-pressed="false">顯示全部答案</button>
+    </div>
+    <div class="toolbar-right">
+      <span id="save-status" class="save-status" aria-live="polite"></span>
+      <button type="button" id="btn-save-draft">暫時存檔</button>
+      <button type="button" id="btn-finish-review" class="btn-primary">完成閱卷</button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div id="banner-area"></div>
+  <div id="exam-root">
+    <p style="text-align:center; color:var(--text-muted); padding: 40px 0;">正在載入考卷資料⋯</p>
+  </div>
+</main>
+
+<div id="modal-backdrop" class="modal-backdrop" hidden>
+  <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <h2 id="modal-title" class="modal-title">確認</h2>
+    <p id="modal-message" class="modal-message"></p>
+    <div class="modal-actions">
+      <button type="button" id="modal-cancel">取消</button>
+      <button type="button" id="modal-confirm" class="btn-primary">確定</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  const ZH_NUMERALS = ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十", "十一", "十二"];
+  const DIFF_LABELS = { hard: "困難", medium: "普通", easy: "容易" };
+
+  let examData = null;
+  let reviewerName = "";
+  // Ordered list of rateable targets: { id, content_hash, label, element }
+  let rateableTargets = [];
+  // Current user ratings: { [id]: { content_hash, difficulty: "hard"|"medium"|"easy"|null, comment: string } }
+  let currentEntries = {};
+  // Stale old reviews when content_hash changed: { [id]: { difficulty, comment } }
+  let staleEntries = {};
+  let hasUnsavedChanges = false;
+  let showAllAnswers = false;
+
+  const progressBadge = document.getElementById("progress-badge");
+  const btnNextUnrated = document.getElementById("btn-next-unrated");
+  const btnToggleAllAns = document.getElementById("btn-toggle-all-ans");
+  const saveStatusEl = document.getElementById("save-status");
+  const btnSaveDraft = document.getElementById("btn-save-draft");
+  const btnFinishReview = document.getElementById("btn-finish-review");
+  const bannerArea = document.getElementById("banner-area");
+  const examRoot = document.getElementById("exam-root");
+
+  const modalBackdrop = document.getElementById("modal-backdrop");
+  const modalTitle = document.getElementById("modal-title");
+  const modalMessage = document.getElementById("modal-message");
+  const modalCancel = document.getElementById("modal-cancel");
+  const modalConfirm = document.getElementById("modal-confirm");
+
+  function storageKey() {
+    if (!examData) return null;
+    return "dili_review_" + examData.run_id + "_" + reviewerName;
+  }
+
+  function saveToLocalStorage() {
+    try {
+      const key = storageKey();
+      if (!key) return;
+      const payload = {
+        updated: new Date().toISOString(),
+        entries: buildCleanEntries()
+      };
+      window.localStorage.setItem(key, JSON.stringify(payload));
+    } catch (e) {
+      // Ignore localStorage quota or privacy errors
+    }
+  }
+
+  function readFromLocalStorage() {
+    try {
+      const key = storageKey();
+      if (!key) return null;
+      const raw = window.localStorage.getItem(key);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.entries && typeof parsed.entries === "object") {
+        return parsed;
+      }
+    } catch (e) {
+      // Ignore parse errors
+    }
+    return null;
+  }
+
+  function clearLocalStorage() {
+    try {
+      const key = storageKey();
+      if (key) window.localStorage.removeItem(key);
+    } catch (e) {
+      // Ignore
+    }
+  }
+
+  function isTargetRated(id) {
+    const entry = currentEntries[id];
+    if (!entry) return false;
+    return Boolean(entry.difficulty) || Boolean((entry.comment || "").trim());
+  }
+
+  function buildCleanEntries() {
+    const out = {};
+    for (const target of rateableTargets) {
+      const entry = currentEntries[target.id];
+      if (!entry) continue;
+      const diff = entry.difficulty || null;
+      const comment = (entry.comment || "").trim();
+      if (diff || comment) {
+        out[target.id] = {
+          content_hash: target.content_hash,
+          difficulty: diff,
+          comment: comment
+        };
+      }
+    }
+    return out;
+  }
+
+  function updateProgressUI() {
+    const total = rateableTargets.length;
+    let rated = 0;
+    for (const target of rateableTargets) {
+      if (isTargetRated(target.id)) rated++;
+    }
+    progressBadge.textContent = "已評 " + rated + "／" + total;
+    if (total > 0 && rated === total) {
+      progressBadge.classList.add("complete");
+    } else {
+      progressBadge.classList.remove("complete");
+    }
+  }
+
+  function markDirty() {
+    hasUnsavedChanges = true;
+    saveStatusEl.textContent = "尚未存檔";
+    saveStatusEl.className = "save-status unsaved";
+    saveToLocalStorage();
+    updateProgressUI();
+  }
+
+  function formatHHMM(isoOrDate) {
+    const d = isoOrDate ? new Date(isoOrDate) : new Date();
+    if (isNaN(d.getTime())) {
+      const now = new Date();
+      return String(now.getHours()).padStart(2, "0") + ":" + String(now.getMinutes()).padStart(2, "0");
+    }
+    return String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0");
+  }
+
+  function showBanner(type, text, actionBtnText, onAction) {
+    bannerArea.innerHTML = "";
+    const div = document.createElement("div");
+    div.className = "banner " + type;
+    const span = document.createElement("span");
+    span.textContent = text;
+    div.appendChild(span);
+
+    if (actionBtnText && onAction) {
+      const btnWrap = document.createElement("div");
+      btnWrap.style.display = "flex";
+      btnWrap.style.gap = "8px";
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "btn-primary";
+      btn.textContent = actionBtnText;
+      btn.addEventListener("click", function () {
+        onAction();
+      });
+      btnWrap.appendChild(btn);
+
+      const dismissBtn = document.createElement("button");
+      dismissBtn.type = "button";
+      dismissBtn.textContent = "不還原";
+      dismissBtn.addEventListener("click", function () {
+        clearLocalStorage();
+        bannerArea.innerHTML = "";
+      });
+      btnWrap.appendChild(dismissBtn);
+
+      div.appendChild(btnWrap);
+    }
+    bannerArea.appendChild(div);
+  }
+
+  function confirmModal(title, message, confirmText) {
+    return new Promise(function (resolve) {
+      modalTitle.textContent = title;
+      modalMessage.textContent = message;
+      modalConfirm.textContent = confirmText || "確定";
+      modalBackdrop.hidden = false;
+
+      function cleanup(result) {
+        modalBackdrop.hidden = true;
+        modalCancel.removeEventListener("click", onCancel);
+        modalConfirm.removeEventListener("click", onConfirm);
+        resolve(result);
+      }
+
+      function onCancel() { cleanup(false); }
+      function onConfirm() { cleanup(true); }
+
+      modalCancel.addEventListener("click", onCancel);
+      modalConfirm.addEventListener("click", onConfirm);
+    });
+  }
+
+  // 將已載入的 entries 對照目前題目與題組的 content_hash
+  function applyLoadedEntries(savedEntries) {
+    currentEntries = {};
+    staleEntries = {};
+    for (const target of rateableTargets) {
+      currentEntries[target.id] = {
+        content_hash: target.content_hash,
+        difficulty: null,
+        comment: ""
+      };
+      const saved = savedEntries && savedEntries[target.id];
+      if (!saved) continue;
+      const hasContent = Boolean(saved.difficulty) || Boolean((saved.comment || "").trim());
+      if (!hasContent) continue;
+
+      if (saved.content_hash === target.content_hash) {
+        currentEntries[target.id] = {
+          content_hash: target.content_hash,
+          difficulty: saved.difficulty || null,
+          comment: saved.comment || ""
+        };
+      } else {
+        // 題目已修改：不自動帶入評分，記錄為舊意見顯示
+        staleEntries[target.id] = {
+          difficulty: saved.difficulty || null,
+          comment: saved.comment || ""
+        };
+      }
+    }
+  }
+
+  // 建立段落文字並將 [26] 轉為底線題號空格
+  function renderPassageWithBlanks(passageText) {
+    const box = document.createElement("div");
+    box.className = "passage-box";
+    const parts = String(passageText || "").split(/(\[\d+\])/g);
+    for (const part of parts) {
+      const m = /^\[(\d+)\]$/.exec(part);
+      if (m) {
+        const blank = document.createElement("span");
+        blank.className = "cloze-blank";
+        blank.textContent = m[1];
+        box.appendChild(blank);
+      } else if (part) {
+        box.appendChild(document.createTextNode(part));
+      }
+    }
+    return box;
+  }
+
+  // 建立圖片或表格
+  function renderFigure(figure) {
+    if (!figure) return null;
+    const box = document.createElement("div");
+    box.className = "figure-box";
+    if (figure.title) {
+      const titleEl = document.createElement("div");
+      titleEl.className = "figure-title";
+      titleEl.textContent = figure.title;
+      box.appendChild(titleEl);
+    }
+    if (figure.kind === "image" && figure.src) {
+      const img = document.createElement("img");
+      img.className = "figure-img";
+      img.src = figure.src;
+      img.alt = figure.title || "考卷附圖";
+      box.appendChild(img);
+    } else if (figure.kind === "table") {
+      const wrap = document.createElement("div");
+      wrap.className = "table-wrap";
+      const table = document.createElement("table");
+      table.className = "figure-table";
+
+      if (Array.isArray(figure.columns) && figure.columns.length > 0) {
+        const thead = document.createElement("thead");
+        const tr = document.createElement("tr");
+        // 第一欄對應每列第一格的列標題
+        const emptyTh = document.createElement("th");
+        emptyTh.textContent = "";
+        tr.appendChild(emptyTh);
+        for (const col of figure.columns) {
+          const th = document.createElement("th");
+          th.textContent = col;
+          tr.appendChild(th);
+        }
+        thead.appendChild(tr);
+        table.appendChild(thead);
+      }
+
+      if (Array.isArray(figure.rows)) {
+        const tbody = document.createElement("tbody");
+        for (const row of figure.rows) {
+          if (!Array.isArray(row)) continue;
+          const tr = document.createElement("tr");
+          row.forEach(function (cell, idx) {
+            const cellEl = document.createElement(idx === 0 ? "th" : "td");
+            if (idx === 0) cellEl.setAttribute("scope", "row");
+            cellEl.textContent = cell;
+            tr.appendChild(cellEl);
+          });
+          tbody.appendChild(tr);
+        }
+        table.appendChild(tbody);
+      }
+
+      wrap.appendChild(table);
+      box.appendChild(wrap);
+    }
+    return box;
+  }
+
+  // 建立小字典註解
+  function renderGlossed(glossed) {
+    if (!Array.isArray(glossed) || glossed.length === 0) return null;
+    const box = document.createElement("div");
+    box.className = "glossed-box";
+    const prefix = document.createElement("span");
+    prefix.textContent = " 註解：";
+    box.appendChild(prefix);
+    for (const g of glossed) {
+      const item = document.createElement("span");
+      item.className = "glossed-item";
+      const w = document.createElement("span");
+      w.className = "glossed-word";
+      w.textContent = g.word;
+      item.appendChild(w);
+      item.appendChild(document.createTextNode(" " + g.meaning));
+      box.appendChild(item);
+    }
+    return box;
+  }
+
+  // 建立選項格線（依選項字數決定兩欄或四欄）
+  function renderChoices(choices) {
+    if (!choices) return null;
+    const keys = ["A", "B", "C", "D"].filter(function (k) { return k in choices; });
+    if (keys.length === 0) return null;
+
+    let maxLen = 0;
+    for (const k of keys) {
+      const len = String(choices[k] || "").length;
+      if (len > maxLen) maxLen = len;
+    }
+    const grid = document.createElement("div");
+    const colClass = maxLen <= 14 ? "cols-4" : (maxLen <= 38 ? "cols-2" : "cols-1");
+    grid.className = "choices-grid " + colClass;
+
+    for (const k of keys) {
+      const cell = document.createElement("div");
+      cell.className = "choice-cell";
+      const label = document.createElement("span");
+      label.className = "choice-label";
+      label.textContent = "(" + k + ")";
+      const text = document.createElement("span");
+      text.textContent = choices[k];
+      cell.appendChild(label);
+      cell.appendChild(text);
+      grid.appendChild(cell);
+    }
+    return grid;
+  }
+
+  // 建立評分與解析區塊
+  function renderReviewSection(obj, isGroup) {
+    const wrapper = document.createElement("div");
+
+    // 若此題有舊版意見（content_hash 不同），顯示提示與灰字舊意見
+    const stale = staleEntries[obj.id];
+    if (stale) {
+      const staleBox = document.createElement("div");
+      staleBox.className = "stale-review-notice";
+      const title = document.createElement("div");
+      title.className = "stale-review-title";
+      title.textContent = "題目已修改，下列為舊意見";
+      staleBox.appendChild(title);
+
+      const content = document.createElement("div");
+      content.className = "stale-review-content";
+      const parts = [];
+      if (stale.difficulty && DIFF_LABELS[stale.difficulty]) {
+        parts.push("原評難易度：" + DIFF_LABELS[stale.difficulty]);
+      }
+      if (stale.comment) {
+        parts.push("原意見：" + stale.comment);
+      }
+      content.textContent = parts.join("　｜　");
+      staleBox.appendChild(content);
+      wrapper.appendChild(staleBox);
+    }
+
+    const controls = document.createElement("div");
+    controls.className = "review-controls";
+
+    const topRow = document.createElement("div");
+    topRow.className = "review-top-row";
+
+    const diffGroup = document.createElement("div");
+    diffGroup.className = "diff-group";
+    const diffLabel = document.createElement("span");
+    diffLabel.className = "diff-label";
+    diffLabel.textContent = isGroup ? "題組整體難易度：" : "難易度：";
+    diffGroup.appendChild(diffLabel);
+
+    const diffButtons = {};
+    ["hard", "medium", "easy"].forEach(function (level) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "diff-btn";
+      btn.setAttribute("data-diff", level);
+      btn.textContent = DIFF_LABELS[level];
+      btn.addEventListener("click", function () {
+        const entry = currentEntries[obj.id];
+        if (!entry) return;
+        // 再次點擊同一顆可取消選取，方便只留空白或重選
+        entry.difficulty = entry.difficulty === level ? null : level;
+        syncRatingDOM(obj.id);
+        markDirty();
+      });
+      diffButtons[level] = btn;
+      diffGroup.appendChild(btn);
+    });
+    topRow.appendChild(diffGroup);
+
+    // 答案與解析（單題皆有；題組若有 ai_notes 也提供檢視）
+    let expPanel = null;
+    let toggleExpBtn = null;
+    const hasExplanation = !isGroup || (Array.isArray(obj.ai_notes) && obj.ai_notes.length > 0);
+    if (hasExplanation) {
+      toggleExpBtn = document.createElement("button");
+      toggleExpBtn.type = "button";
+      toggleExpBtn.className = "btn-toggle-exp";
+      toggleExpBtn.textContent = isGroup ? "AI 審題意見" : "答案與解析";
+      topRow.appendChild(toggleExpBtn);
+    }
+
+    controls.appendChild(topRow);
+
+    const textarea = document.createElement("textarea");
+    textarea.className = "comment-input";
+    textarea.rows = 2;
+    textarea.placeholder = "哪裡不好？（空白代表這題沒問題）";
+    textarea.addEventListener("input", function () {
+      const entry = currentEntries[obj.id];
+      if (!entry) return;
+      entry.comment = textarea.value;
+      markDirty();
+    });
+    controls.appendChild(textarea);
+
+    if (hasExplanation) {
+      expPanel = document.createElement("div");
+      expPanel.className = "explanation-panel";
+      expPanel.hidden = !showAllAnswers;
+
+      if (!isGroup) {
+        const ansLine = document.createElement("div");
+        ansLine.className = "ans-line";
+        ansLine.textContent = "答案：" + (obj.answer || "");
+        expPanel.appendChild(ansLine);
+
+        if (obj.explanation && obj.explanation.correct) {
+          const correctEl = document.createElement("div");
+          correctEl.className = "exp-section";
+          correctEl.textContent = "正解說明：" + obj.explanation.correct;
+          expPanel.appendChild(correctEl);
+        }
+
+        if (obj.explanation && Array.isArray(obj.explanation.distractors) && obj.explanation.distractors.length > 0) {
+          const distTitle = document.createElement("div");
+          distTitle.className = "exp-section";
+          distTitle.textContent = "錯誤選項理由：";
+          const ul = document.createElement("ul");
+          ul.className = "exp-distractors";
+          for (const d of obj.explanation.distractors) {
+            const li = document.createElement("li");
+            li.textContent = "(" + d.option + ") " + d.reason;
+            ul.appendChild(li);
+          }
+          distTitle.appendChild(ul);
+          expPanel.appendChild(distTitle);
+        }
+      }
+
+      if (Array.isArray(obj.ai_notes) && obj.ai_notes.length > 0) {
+        const aiBox = document.createElement("div");
+        aiBox.className = "ai-notes-box";
+        const aiTitle = document.createElement("div");
+        aiTitle.textContent = "AI 審題意見：";
+        aiBox.appendChild(aiTitle);
+        const ul = document.createElement("ul");
+        for (const note of obj.ai_notes) {
+          const li = document.createElement("li");
+          li.textContent = note;
+          ul.appendChild(li);
+        }
+        aiBox.appendChild(ul);
+        expPanel.appendChild(aiBox);
+      }
+
+      toggleExpBtn.addEventListener("click", function () {
+        expPanel.hidden = !expPanel.hidden;
+        toggleExpBtn.classList.toggle("btn-active", !expPanel.hidden);
+      });
+      if (showAllAnswers) {
+        toggleExpBtn.classList.add("btn-active");
+      }
+
+      controls.appendChild(expPanel);
+    }
+
+    wrapper.appendChild(controls);
+
+    // 綁定更新函式到 target
+    const targetObj = rateableTargets.find(function (t) { return t.id === obj.id; });
+    if (targetObj) {
+      targetObj.diffButtons = diffButtons;
+      targetObj.textarea = textarea;
+      targetObj.expPanel = expPanel;
+      targetObj.toggleExpBtn = toggleExpBtn;
+    }
+
+    return wrapper;
+  }
+
+  function syncRatingDOM(id) {
+    const target = rateableTargets.find(function (t) { return t.id === id; });
+    if (!target) return;
+    const entry = currentEntries[id] || { difficulty: null, comment: "" };
+    if (target.diffButtons) {
+      ["hard", "medium", "easy"].forEach(function (level) {
+        const btn = target.diffButtons[level];
+        if (btn) {
+          btn.classList.toggle("selected", entry.difficulty === level);
+        }
+      });
+    }
+    if (target.textarea && target.textarea.value !== (entry.comment || "")) {
+      target.textarea.value = entry.comment || "";
+    }
+  }
+
+  function syncAllRatingsDOM() {
+    for (const target of rateableTargets) {
+      syncRatingDOM(target.id);
+    }
+    updateProgressUI();
+  }
+
+  function renderItemCard(item) {
+    const card = document.createElement("article");
+    card.className = "entry-card item-card";
+
+    const target = rateableTargets.find(function (t) { return t.id === item.id; });
+    if (target) target.element = card;
+
+    const body = document.createElement("div");
+    body.className = "item-body";
+
+    const numEl = document.createElement("div");
+    numEl.className = "item-number";
+    numEl.textContent = item.number + ".";
+    body.appendChild(numEl);
+
+    const main = document.createElement("div");
+    main.className = "item-main";
+
+    if (item.instruction) {
+      const inst = document.createElement("div");
+      inst.className = "item-instruction";
+      inst.textContent = "作答提示：" + item.instruction;
+      main.appendChild(inst);
+    }
+
+    const stem = document.createElement("div");
+    stem.className = "item-stem";
+    stem.textContent = item.stem || "";
+    main.appendChild(stem);
+
+    const figEl = renderFigure(item.figure);
+    if (figEl) main.appendChild(figEl);
+
+    const glossEl = renderGlossed(item.glossed);
+    if (glossEl) main.appendChild(glossEl);
+
+    const choicesEl = renderChoices(item.choices);
+    if (choicesEl) main.appendChild(choicesEl);
+
+    body.appendChild(main);
+    card.appendChild(body);
+
+    card.appendChild(renderReviewSection(item, false));
+    return card;
+  }
+
+  function renderGroupCard(group) {
+    const card = document.createElement("section");
+    card.className = "entry-card group-card";
+
+    const target = rateableTargets.find(function (t) { return t.id === group.id; });
+    if (target) target.element = card;
+
+    const header = document.createElement("div");
+    header.className = "group-header";
+
+    const range = document.createElement("span");
+    range.className = "group-range";
+    range.textContent = "【" + group.first + "–" + group.last + " 題】";
+    header.appendChild(range);
+
+    if (group.instruction) {
+      const inst = document.createElement("span");
+      inst.className = "group-instruction";
+      inst.textContent = group.instruction;
+      header.appendChild(inst);
+    }
+    card.appendChild(header);
+
+    if (group.passage) {
+      card.appendChild(renderPassageWithBlanks(group.passage));
+    }
+
+    const figEl = renderFigure(group.figure);
+    if (figEl) card.appendChild(figEl);
+
+    const glossEl = renderGlossed(group.glossed);
+    if (glossEl) card.appendChild(glossEl);
+
+    // 題組本身的評分列
+    card.appendChild(renderReviewSection(group, true));
+
+    // 子題列表
+    const subWrap = document.createElement("div");
+    subWrap.className = "group-items";
+    if (Array.isArray(group.items)) {
+      for (const item of group.items) {
+        subWrap.appendChild(renderItemCard(item));
+      }
+    }
+    card.appendChild(subWrap);
+
+    return card;
+  }
+
+  function collectRateableTargets(exam) {
+    const list = [];
+    for (const part of exam.parts || []) {
+      for (const entry of part.entries || []) {
+        if (entry.type === "group") {
+          list.push({
+            id: entry.id,
+            content_hash: entry.content_hash,
+            label: "題組 " + entry.first + "–" + entry.last + " 題",
+            element: null
+          });
+          for (const item of entry.items || []) {
+            list.push({
+              id: item.id,
+              content_hash: item.content_hash,
+              label: "第 " + item.number + " 題",
+              element: null
+            });
+          }
+        } else if (entry.type === "item") {
+          list.push({
+            id: entry.id,
+            content_hash: entry.content_hash,
+            label: "第 " + entry.number + " 題",
+            element: null
+          });
+        }
+      }
+    }
+    return list;
+  }
+
+  function renderExam() {
+    examRoot.innerHTML = "";
+
+    // 卷頭
+    const header = document.createElement("div");
+    header.className = "exam-header";
+
+    const titleEl = document.createElement("h1");
+    titleEl.className = "exam-title";
+    titleEl.textContent = examData.title || "";
+    header.appendChild(titleEl);
+
+    const subEl = document.createElement("p");
+    subEl.className = "exam-subtitle";
+    subEl.textContent = examData.subtitle || "";
+    header.appendChild(subEl);
+
+    const meta = document.createElement("div");
+    meta.className = "exam-meta";
+    const revSpan = document.createElement("span");
+    revSpan.textContent = "閱卷人：" + reviewerName;
+    meta.appendChild(revSpan);
+    header.appendChild(meta);
+
+    examRoot.appendChild(header);
+
+    // 各大題
+    (examData.parts || []).forEach(function (part, idx) {
+      const partSec = document.createElement("section");
+      partSec.className = "exam-part";
+
+      const zhNum = ZH_NUMERALS[idx] || String(idx + 1);
+      const h2 = document.createElement("h2");
+      h2.className = "part-title";
+      h2.textContent = zhNum + "、" + part.title + "（第 " + part.first + "–" + part.last + " 題，" + part.points + "）";
+      partSec.appendChild(h2);
+
+      for (const entry of part.entries || []) {
+        if (entry.type === "group") {
+          partSec.appendChild(renderGroupCard(entry));
+        } else if (entry.type === "item") {
+          partSec.appendChild(renderItemCard(entry));
+        }
+      }
+
+      examRoot.appendChild(partSec);
+    });
+
+    syncAllRatingsDOM();
+  }
+
+  // 全域切換顯示全部答案
+  btnToggleAllAns.addEventListener("click", function () {
+    showAllAnswers = !showAllAnswers;
+    btnToggleAllAns.setAttribute("aria-pressed", String(showAllAnswers));
+    btnToggleAllAns.classList.toggle("btn-active", showAllAnswers);
+    btnToggleAllAns.textContent = showAllAnswers ? "收起全部答案" : "顯示全部答案";
+
+    for (const target of rateableTargets) {
+      if (target.expPanel) {
+        target.expPanel.hidden = !showAllAnswers;
+      }
+      if (target.toggleExpBtn) {
+        target.toggleExpBtn.classList.toggle("btn-active", showAllAnswers);
+      }
+    }
+  });
+
+  // 跳到下一個未評
+  btnNextUnrated.addEventListener("click", function () {
+    const unrated = rateableTargets.filter(function (t) { return !isTargetRated(t.id); });
+    if (unrated.length === 0) {
+      saveStatusEl.textContent = "全部題目與題組皆已評分";
+      saveStatusEl.className = "save-status";
+      return;
+    }
+
+    // 尋找目前視窗位置下方的第一個未評，若已經到底則從頭開始
+    const threshold = 95;
+    let nextTarget = unrated.find(function (t) {
+      return t.element && t.element.getBoundingClientRect().top > threshold;
+    });
+    if (!nextTarget) {
+      nextTarget = unrated[0];
+    }
+
+    if (nextTarget && nextTarget.element) {
+      nextTarget.element.scrollIntoView({ behavior: "smooth", block: "start" });
+      nextTarget.element.classList.add("highlight-focus");
+      setTimeout(function () {
+        if (nextTarget.element) nextTarget.element.classList.remove("highlight-focus");
+      }, 1500);
+    }
+  });
+
+  async function sendFeedbackRequest(endpoint) {
+    btnSaveDraft.disabled = true;
+    btnFinishReview.disabled = true;
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          reviewer: reviewerName,
+          entries: buildCleanEntries()
+        })
+      });
+      const data = await response.json().catch(function () { return {}; });
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error || "儲存失敗，請稍後再試");
+      }
+      hasUnsavedChanges = false;
+      saveToLocalStorage();
+      return data;
+    } finally {
+      btnSaveDraft.disabled = false;
+      btnFinishReview.disabled = false;
+    }
+  }
+
+  // 暫時存檔
+  btnSaveDraft.addEventListener("click", async function () {
+    try {
+      const result = await sendFeedbackRequest("/api/feedback");
+      saveStatusEl.textContent = "已存檔 " + formatHHMM(result.updated);
+      saveStatusEl.className = "save-status";
+    } catch (err) {
+      saveStatusEl.textContent = "存檔失敗：" + (err.message || "網路錯誤");
+      saveStatusEl.className = "save-status error";
+    }
+  });
+
+  // 完成閱卷
+  btnFinishReview.addEventListener("click", async function () {
+    const total = rateableTargets.length;
+    let rated = 0;
+    for (const target of rateableTargets) {
+      if (isTargetRated(target.id)) rated++;
+    }
+    const unratedCount = total - rated;
+
+    if (unratedCount > 0) {
+      const confirmed = await confirmModal(
+        "確認完成閱卷",
+        "還有 " + unratedCount + " 題未評，確定完成？",
+        "確定完成"
+      );
+      if (!confirmed) return;
+    }
+
+    try {
+      const result = await sendFeedbackRequest("/api/finish");
+      saveStatusEl.textContent = "已存檔 " + formatHHMM(result.updated);
+      saveStatusEl.className = "save-status";
+      showBanner("banner-finish", "已完成閱卷，可以回到 Claude Code 通知修題");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      saveStatusEl.textContent = "完成失敗：" + (err.message || "網路錯誤");
+      saveStatusEl.className = "save-status error";
+    }
+  });
+
+  // 離開頁面前提醒未存檔變更
+  window.addEventListener("beforeunload", function (e) {
+    if (hasUnsavedChanges) {
+      e.preventDefault();
+      e.returnValue = "";
+    }
+  });
+
+  // 初始化載入
+  async function init() {
+    try {
+      const examResp = await fetch("/api/exam");
+      const examJson = await examResp.json().catch(function () { return {}; });
+      if (!examResp.ok) {
+        throw new Error(examJson.error || "無法載入考卷資料");
+      }
+      examData = examJson;
+      reviewerName = examData.reviewer || "閱卷人";
+      document.title = (examData.title || "段考") + " — 閱卷系統";
+      rateableTargets = collectRateableTargets(examData);
+
+      const fbResp = await fetch("/api/feedback?reviewer=" + encodeURIComponent(reviewerName));
+      const fbJson = await fbResp.json().catch(function () { return {}; });
+      if (!fbResp.ok) {
+        throw new Error(fbJson.error || "無法載入已存的閱卷意見");
+      }
+
+      const serverEntries = fbJson.entries || {};
+      const serverHasData = Object.keys(serverEntries).length > 0 && fbJson.status !== "new";
+
+      applyLoadedEntries(serverEntries);
+      renderExam();
+
+      if (fbJson.status === "final") {
+        showBanner("banner-finish", "已完成閱卷，可以回到 Claude Code 通知修題");
+      }
+
+      if (fbJson.updated) {
+        saveStatusEl.textContent = "已存檔 " + formatHHMM(fbJson.updated);
+      }
+
+      // 伺服器沒有資料而 localStorage 有時，詢問要不要還原
+      if (!serverHasData) {
+        const localBackup = readFromLocalStorage();
+        if (localBackup && localBackup.entries && Object.keys(localBackup.entries).length > 0) {
+          showBanner(
+            "banner-restore",
+            "偵測到此瀏覽器有尚未存回伺服器的閱卷紀錄，是否要還原？",
+            "還原紀錄",
+            function () {
+              applyLoadedEntries(localBackup.entries);
+              renderExam();
+              markDirty();
+              bannerArea.innerHTML = "";
+            }
+          );
+        }
+      }
+    } catch (err) {
+      examRoot.innerHTML = "";
+      showBanner("banner-error", "載入錯誤：" + (err.message || "無法連線至閱卷伺服器"));
+    }
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
