@@ -1619,7 +1619,9 @@
         throw new Error(examJson.error || "無法載入考卷資料");
       }
       examData = examJson;
-      reviewerName = examData.reviewer || "閱卷人";
+      // 網址可指定閱卷人（?reviewer=名稱），同一個伺服器可供多人分開閱卷
+      const fromUrl = new URLSearchParams(window.location.search).get("reviewer");
+      reviewerName = (fromUrl && fromUrl.trim()) || examData.reviewer || "閱卷人";
       document.title = (examData.title || "段考") + " — 閱卷系統";
       rateableTargets = collectRateableTargets(examData);
 

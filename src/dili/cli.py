@@ -22,7 +22,7 @@ def main(argv=None):
         step.add_argument("--section", action="append", help="只處理指定大題（可重複）")
         step.add_argument("--to", dest="worker", help="改派給 claude、codex 或 antigravity")
     review_ui = commands.add_parser("review-ui", help="開啟本機閱卷網頁：每題評難易度、寫意見，可暫存與完成閱卷")
-    review_ui.add_argument("run")
+    review_ui.add_argument("run", nargs="?", help="預設為 runs/CURRENT（最近一次出卷）")
     review_ui.add_argument("--reviewer", default="Richard", help="閱卷人名稱（每人分開存）")
     review_ui.add_argument("--port", type=int, default=8765)
     review_ui.add_argument("--no-browser", action="store_true")

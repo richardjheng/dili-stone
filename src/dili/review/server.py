@@ -5,7 +5,7 @@ import webbrowser
 from functools import partial
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, quote, urlparse
 
 from ..pipeline.runs import Run
 from . import store
@@ -64,8 +64,15 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def serve(run: Run, *, reviewer: str, port: int = 8765, open_browser: bool = True) -> None:
-    server = ThreadingHTTPServer(("127.0.0.1", port), partial(Handler, run=run, reviewer=reviewer))
-    url = f"http://127.0.0.1:{port}/"
+    url = f"http://127.0.0.1:{port}/?reviewer={quote(reviewer)}"
+    try:
+        server = ThreadingHTTPServer(("127.0.0.1", port), partial(Handler, run=run, reviewer=reviewer))
+    except OSError:
+        # Already running (e.g. started twice): just bring the page up again.
+        print(f"閱卷網頁已在執行：{url}")
+        if open_browser:
+            webbrowser.open(url)
+        return
     print(f"閱卷網頁：{url}（閱卷人：{reviewer}）；按 Ctrl+C 結束。")
     if open_browser:
         webbrowser.open(url)
