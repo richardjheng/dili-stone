@@ -16,6 +16,28 @@
 
 **字表 metadata：** 只接受標準鍵。必填 `source_url, version, retrieved_date, usage_terms, entry_count`；可另記 `source_document, basic_1200_count, method, known_issues`（最後一項為文字清單），提供 1200 筆數時也核對實際旗標。舊中文鍵及 `license`、`count`、`source_title` 等別名一律拒絕。日期採 ISO YYYY-MM-DD。唯一鍵為大小寫敏感的 `(headword, pos)`，因此 `Miss`／`miss` 可以共存，完全相同的詞條與詞性仍拒絕；loader 會去掉欄位首尾空白，不改大小寫。來源詞性保持原字串，空字串表示未知，不猜詞義。整合測試會讀取既有 `data/wordlists/moe2000.csv` 與其 metadata，驗證共 2005 筆、`basic_1200=True` 共 1211 筆。這只驗證本地檔案與 loader 契約，不等同重新核對官方 PDF；載入不自動人工核准。
 
+## 先備字表選項
+
+`Prerequisite.allow_basic_1200` 與 `allow_extended_800` 均為布林，預設皆為 `true`。`allow_extended_800=true` 必須同時開放 `allow_basic_1200`，否則 Pydantic 驗證拒絕；這項跨欄位規則不由 JSON Schema 單獨保證。
+
+| 1200 基本字 | 800 字 | 可直接用於題幹、短文、選項與答案的字彙 |
+| --- | --- | --- |
+| false | false | `scope` 與 `prerequisite.lesson_ids` 的字彙；其他字須在該題或題組 `glossed` 附中文註解。 |
+| true | false | 上述字彙，加上指定字表 `basic_1200=true` 的詞條。 |
+| true | true | 上述字彙，加上指定字表的全部詞條。 |
+
+字表仍由 `prerequisite.wordlist_id` 指定，800 字指其中 `basic_1200=false` 的詞條。未開放詞條仍會參與詞形辨識，但不因此通過；超範圍訊息明列「課綱 1200 基本字（本卷未開放）」或「課綱 800 字（本卷未開放）」。範圍、先備課次及附註優先於未開放標記。數字、可能專有名詞與詞形歧義仍走既有人工確認流程。
+
+開放字表不會新增考點：單字考點選擇題的選項仍須完整對應範圍內字彙／片語，文意字彙答案仍須對應範圍內的應用字彙。出題工作單的共同規則會依藍圖產生。新增欄位會參與內容雜湊，因此舊藍圖或先備設定的人工核准需重新確認。
+
+## 閱卷存檔與意見篩選
+
+每次暫存或完成閱卷，先寫入 `feedback/<閱卷人>/history/<UTC時間>-<draft|final>.json`，再以原子替換更新 `feedback/<閱卷人>.json`。時間格式為 `YYYYMMDDTHHMMSS.ffffffZ`；歷史檔採排他建立，同名時遞增一微秒重試，保留每次存檔。尚未出現在歷史中的既有最新檔會先按原始位元組補存，包含啟用此功能前的舊資料。歷史寫入失敗不更新最新檔；最新檔更新失敗則歷史仍保留。
+
+最新檔照舊用於載入與定稿篩選；歷史檔僅供保留，不自動重送舊意見，也不在最新檔為草稿時改採舊定稿。閱卷人名稱不可含路徑分隔符，亦不可用點或空白結尾，避免歷史目錄混用。
+
+`dili feedback <run> --reviewer Richard-1` 只選該閱卷人的定稿意見，`--reviewer` 可重複，省略則包含所有閱卷人。內容雜湊仍須符合目前題目，重複指定同名不重送；查無該名稱時不回退為全選。程式檢核錯誤依既有流程一併處理，不受閱卷人篩選影響。
+
 ## 大題與題目極性
 
 `Section.part: Text | None = None` 是大題共用標題。同名 part 必須在 sections 中連續，經過其他 part 或 `None` 後再出現會拒絕。`None` 的 section 各自成一大題，即使 title 相同也不合併。section ID、題型、題組大小與配分仍獨立保存，Batch 繼續依 section 驗證。
@@ -64,6 +86,6 @@
 
 `examples/figures.json` 示範走到 (2,1) 後查詢左側轉角 Art Studio，並有同格位的 Studio Stop。這套規則只涵蓋明定的問路形式，題幹應表明序數由終點回數；不推論所有自然語言路線題。
 
-**使用與驗證：** 安裝後由專案根目錄執行 `python -m dili.models.export_schema`，輸出八類 `schemas/<name>.json`（作者輸入）及 `<name>.output.json`（正規化輸出，含唯讀狀態／hash），共 16 檔。作者 JSON 交給 `Model.model_validate`；正規化 JSON 可再用 `model_validate_json` 載回。JSON Schema 表達欄位與 union，跨欄位總分、引用、審核等仍須執行 Pydantic 驗證。測試使用 unittest 寫法，也可由 pytest 收集；現有 `agora check` 會跑 unittest，並由匯出整合測試更新 `schemas/`。
+**使用與驗證：** 安裝後由專案根目錄執行 `python -m dili.models.export_schema`，輸出八類 `schemas/<name>.json`（作者輸入）及 `<name>.output.json`（正規化輸出，含唯讀狀態／hash），共 16 檔。作者 JSON 交給 `Model.model_validate`；正規化 JSON 可再用 `model_validate_json` 載回。JSON Schema 表達欄位與 union，跨欄位總分、引用、審核等仍須執行 Pydantic 驗證。測試使用 unittest 寫法，由 `agora check` 透過 pytest 收集；匯出整合測試會在暫存目錄重新匯出並比對 `schemas/`，不改寫工作區檔案。
 
 **後續界線：** 地圖關係與抵達查詢、Route 的 `destination(start_id, stops_ahead)`／`travel_minutes()`、`cell()`、`members()` 提供圖片答案驗算的資料查詢；實際繪圖及將自然語言題意連到查詢由 M2/M3 處理。中文欄位只檢查含中文字，不保證解析正確；字詞超範、歧義、先備詞義確認與實際人工審題屬後續流程。範例將 20 題題組暫分為克漏字 6 題／閱讀 14 題，僅示範可變組大小，實際出卷配置仍待確認。M0b 依討論共識修訂上述契約，模型版號暫維持 0.1.0。

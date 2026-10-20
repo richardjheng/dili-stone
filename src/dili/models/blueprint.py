@@ -32,10 +32,14 @@ class Header(Model):
 class Prerequisite(Reviewable):
     wordlist_id: Id
     lesson_ids: tuple[Id, ...]  # required, even if explicitly empty
+    allow_basic_1200: bool = True
+    allow_extended_800: bool = True
 
     @model_validator(mode="after")
     def distinct(self) -> Self:
         unique(self.lesson_ids, "prerequisite lesson IDs")
+        if self.allow_extended_800 and not self.allow_basic_1200:
+            raise ValueError("allow_extended_800 requires allow_basic_1200")
         return self
 
 

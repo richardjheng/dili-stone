@@ -39,14 +39,14 @@ KIND_RULES = {
 COMMON_RULES = """\
 ## 共同規則
 1. **原創**：不得使用課本、講義、備課用書或任何範本考卷的句子、課文、例句、練習題，也不要改寫它們。
-2. **範圍**：考點只能是下表的字彙與文法。題幹與情境可以使用課綱 **1200 基本字**
-   （`data/wordlists/moe2000.csv` 中 `basic_1200` 為 `true` 的字）。其餘 800 字和表外的字，
-   都要在該題或題組的 `glossed` 附中文註解；範圍外的句型與片語（例如尚未教過的 be interested in）一律不要用。
+2. **範圍**：考點只能是下表的字彙與文法。單字考點題的選項仍須完整對應考試範圍內字彙／片語。
+   {vocabulary_rule}
+   其他字都要在該題或題組的 `glossed` 附中文註解；範圍外的句型與片語（例如尚未教過的 be interested in）一律不要用。
 3. **人名**只用 `data/lemma/names.txt` 裡的名字。
 4. **答案唯一**：每題只能有一個正確答案，其他選項要明確錯誤，不要出模稜兩可的題目。
-   **誘答選項要有誘答力**（Richard 閱卷意見）：錯誤選項要和正解同詞性、同時態、同一類（例如都是時間說法、
-   都是過去式），放回句子乍看說得通，學生必須懂考點才能排除；不要用句意明顯不通、或靠刪去法就能解的選項。
-   答案不要直接照抄短文的句子。
+   **誘答選項要有誘答力**（Richard 閱卷意見）：每個錯誤選項都要對應一種具體的學生迷思（誰可能會選、靠哪條線索排除），
+   放回句子乍看說得通；不要用句意明顯不通、或靠刪去法就能解的選項。誘答設計要分散在全卷：有些題目選項同形式、比語意，
+   有些題目選項並列不同文法形式（例如不同時態）、比文法。答案不要直接照抄短文的句子。
 5. **解析**：`explanation.correct_zh` 用中文說明為什麼這個答案正確；選擇題的
    `explanation.distractors` 為另外三個選項各寫一句中文，說明為什麼不選。
 6. `targets` 填這題考的字彙／文法 ID（見下表），至少一個。
@@ -54,6 +54,23 @@ COMMON_RULES = """\
 8. **格式**：一個 Batch JSON，結構見 `schemas/batch.json`，範例見 `examples/synthetic_batch.json`、
    `examples/synthetic_group.json`、`examples/figures.json`。
 """
+
+
+def common_rules(blueprint: Blueprint) -> str:
+    prerequisite = blueprint.prerequisite
+    allowed = []
+    if prerequisite.allow_basic_1200:
+        allowed.append("課綱 **1200 基本字**（`basic_1200=true`）")
+    if prerequisite.allow_extended_800:
+        allowed.append("課綱 **800 字**（`basic_1200=false`）")
+    rule = "題幹、短文、選項與答案可直接使用考試範圍與先備課次（`prerequisite.lesson_ids`）的字彙。"
+    if allowed:
+        rule += f"本卷另開放字表 `{prerequisite.wordlist_id}` 的" + "及".join(allowed) + "，免附註。"
+        if not prerequisite.allow_extended_800:
+            rule += "課綱 800 字（本卷未開放）。"
+    else:
+        rule += "課綱 1200 基本字與 800 字均未開放。"
+    return COMMON_RULES.format(vocabulary_rule=rule)
 
 
 def first_numbers(blueprint: Blueprint) -> dict[str, int]:
@@ -110,7 +127,7 @@ def generation_order(run: Run, section_id: str, lessons: list[Lesson], *, worker
 ## 必須涵蓋的考點
 {chr(10).join(must) if must else "- 不指定；從下表自選，主題分散在各單元。"}
 
-{COMMON_RULES}
+{common_rules(blueprint)}
 ## 交付
 - **只寫一個檔案**：`{run.batch_path(section_id).as_posix()}`，內容為
   `{{"run_id": "{run.id}", "section_id": "{section.id}", "produced_by": "{worker}", ...}}`。

@@ -298,16 +298,62 @@ class ExamTests(unittest.TestCase):
         self.assertNotIn("similar_stem", codes(report, "warnings"))
 
     def test_extended_800_words_need_a_gloss(self):
+        bp = blueprint(prerequisite=dict(wordlist_id="moe2000", lesson_ids=[], allow_extended_800=False))
         wordlist = WordList.model_validate(dict(
             id="moe2000", metadata=dict(source_url="https://example.invalid/synthetic", version="fake",
                                        retrieved_date="2026-10-18", usage_terms="手寫假資料", entry_count=2),
             entries=[dict(headword="the", pos="", basic_1200=True), dict(headword="mall", pos="", basic_1200=False)]))
-        report = check([item(stem="the cat mall")], wordlist=wordlist)
+        report = check([item(stem="the cat mall")], wordlist=wordlist, bp=bp)
         finding = next(e for e in report.errors if e.code == "out_of_scope")
-        self.assertIn("800", finding.message)
+        self.assertIn("課綱 800 字（本卷未開放）", finding.message)
         glossed = check([item(stem="the cat mall", glossed=[dict(word="mall", meaning_zh="購物中心")])],
-                        wordlist=wordlist)
+                        wordlist=wordlist, bp=bp)
         self.assertNotIn("out_of_scope", codes(glossed))
+
+    def test_wordlist_switches_cover_context_choices_answers_and_figures(self):
+        wordlist = words(("the", "mall")).model_copy(update={"entries": [
+            dict(headword="the", pos="", basic_1200=True),
+            dict(headword="mall", pos="", basic_1200=False)]})
+        for basic, extended, expected in [(False, False, {"the", "malls"}),
+                                           (True, False, {"malls"}), (True, True, set())]:
+            with self.subTest(basic=basic, extended=extended):
+                bp = blueprint(kind="reading", prerequisite=dict(wordlist_id="moe2000", lesson_ids=[],
+                               allow_basic_1200=basic, allow_extended_800=extended))
+                q = item(kind="reading", stem="the malls", choices=dict(A="malls", B="cat", C="run", D="dog"))
+                group = Group(id="g", section_id="s", kind="reading", instruction="請閱讀",
+                              passage="the malls", items=[q], figure=dict(kind="venn", id="f", title="the malls",
+                              left_label="cat", right_label="dog", left=["malls"], right=[], intersection=[]))
+                report = check(bp=bp, batches=[batch([], groups=[group])], wordlist=wordlist)
+                errors = [e for e in report.errors if e.code == "out_of_scope"]
+                self.assertEqual({w for e in errors for w in e.words}, expected)
+                for error in errors:
+                    self.assertIn("課綱 1200 基本字（本卷未開放）" if error.words == ["the"]
+                                  else "課綱 800 字（本卷未開放）", error.message)
+                written = item(kind="guided_writing", stem="cat", answer=dict(accepted_text=["the malls"]))
+                written_bp = blueprint(kind="guided_writing", prerequisite=bp.prerequisite)
+                written_report = check([written], bp=written_bp, wordlist=wordlist)
+                self.assertEqual({w for e in written_report.errors if e.code == "out_of_scope" for w in e.words}, expected)
+
+    def test_disabled_lists_keep_scope_prior_lessons_and_glosses_allowed(self):
+        wordlist = words(("cat", "mall", "jump")).model_copy(update={"entries": [
+            dict(headword=h, pos="", basic_1200=(h == "cat")) for h in ("cat", "mall", "jump")]})
+        bp = blueprint(prerequisite=dict(wordlist_id="moe2000", lesson_ids=["prior"],
+                                        allow_basic_1200=False, allow_extended_800=False))
+        q = item(stem="cat malls jumps", glossed=[dict(word="mall", meaning_zh="購物中心")])
+        report = check([q], bp=bp, lessons=[lesson(), lesson("prior", [("jump", "application")])], wordlist=wordlist)
+        self.assertEqual(report.errors, [])
+        report = check([item(stem="cat Malls quokka")], bp=bp,
+                       lessons=[lesson(), lesson("prior")], wordlist=wordlist)
+        self.assertEqual([e.words for e in report.errors if e.code == "out_of_scope"], [["Malls"], ["quokka"]])
+        self.assertIn("超範圍生字", report.errors[-1].message)
+
+    def test_open_wordlists_do_not_become_vocab_targets_or_options(self):
+        q = item(stem="mall", choices=dict(A="mall", B="run", C="cat", D="dog"))
+        report = check([q], wordlist=words(("mall",)))
+        self.assertNotIn("out_of_scope", codes(report))
+        self.assertIn("option_not_scope", codes(report))
+        q = item(kind="word_in_context", stem="mall", answer=dict(accepted_text=["mall"]))
+        self.assertIn("answer_not_application", codes(check([q], wordlist=words(("mall",)))))
 
     def test_letter_hint_blanks_are_not_words(self):
         report = check([item(kind="word_in_context", stem="the cat b______e and the l____r ______")])

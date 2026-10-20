@@ -67,6 +67,24 @@ class PipelineTests(unittest.TestCase):
         self.assertIn("u4-v4-lawyer", order)
         self.assertIn("agora build", order)
 
+    def test_work_order_wordlist_rules_follow_blueprint(self):
+        from unittest.mock import patch
+        original = self.run.blueprint()
+        for basic, extended, phrase in [(False, False, "課綱 1200 基本字與 800 字均未開放"),
+                                        (True, False, "課綱 800 字（本卷未開放）"),
+                                        (True, True, "課綱 **800 字**（`basic_1200=false`）")]:
+            with self.subTest(basic=basic, extended=extended):
+                bp = original.model_copy(update={"prerequisite": original.prerequisite.model_copy(update={
+                    "allow_basic_1200": basic, "allow_extended_800": extended})})
+                with patch.object(type(self.run), "blueprint", return_value=bp):
+                    order = generation_order(self.run, "cloze", self.catalog.scope(bp), worker="claude")
+                self.assertIn(phrase, order)
+                self.assertEqual("課綱 **1200 基本字**" in order, basic)
+                self.assertIn("prerequisite.lesson_ids", order)
+                self.assertIn("單字考點題的選項仍須完整對應考試範圍內", order)
+                self.assertIn("其他字都要", order)
+                self.assertNotIn("{vocabulary_rule}", order)
+
     def test_generate_retries_with_errors_then_accepts(self):
         deliveries = [self.words_batch(bad=True), self.words_batch()]
         orders = []

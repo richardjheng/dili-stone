@@ -80,6 +80,19 @@ class BlueprintTests(unittest.TestCase):
         with self.assertRaises(ValidationError):
             Prerequisite(lesson_ids=[])
 
+    def test_prerequisite_wordlist_switches_and_dependency(self):
+        default = Prerequisite(wordlist_id="moe2000", lesson_ids=[])
+        self.assertTrue(default.allow_basic_1200)
+        self.assertTrue(default.allow_extended_800)
+        for basic, extended in [(False, False), (True, False), (True, True)]:
+            with self.subTest(basic=basic, extended=extended):
+                value = default.model_copy(update=dict(allow_basic_1200=basic, allow_extended_800=extended))
+                self.assertEqual(Prerequisite.model_validate_json(value.model_dump_json()), value)
+        with self.assertRaisesRegex(ValidationError, "allow_extended_800 requires allow_basic_1200"):
+            default.model_copy(update=dict(allow_basic_1200=False))
+        with self.assertRaises(ValidationError):
+            Prerequisite(wordlist_id="moe2000", lesson_ids=[], allow_basic_1200=False, allow_extended_800=True)
+
     def test_duplicate_sections_scope_and_overlap(self):
         bp = small_blueprint()
         for updates in ({"scope": ["demo-b3-u4", "demo-b3-u4"]},
@@ -456,6 +469,18 @@ class WordListTests(unittest.TestCase):
 
 
 class SchemaTests(unittest.TestCase):
+    def test_committed_schemas_match_export(self):
+        from difflib import unified_diff
+        with tempfile.TemporaryDirectory() as folder:
+            for path in export_schemas(folder):
+                expected = path.read_text(encoding="utf-8")
+                actual = (ROOT / "schemas" / path.name).read_text(encoding="utf-8")
+                if expected != actual:
+                    print(f"FAIL: schema export mismatch: {path.name}")
+                    print("".join(unified_diff(actual.splitlines(keepends=True), expected.splitlines(keepends=True),
+                                               fromfile="committed", tofile="exported")))
+                self.assertEqual(expected, actual, path.name)
+
     def test_export_is_deterministic_and_has_discriminator(self):
         with tempfile.TemporaryDirectory() as folder:
             paths = export_schemas(folder)

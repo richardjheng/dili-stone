@@ -13,7 +13,7 @@
     "scope_text": "翰林版第三冊 Unit 2～5"
   },
   "scope": ["hanlin-b3-u2", "hanlin-b3-u3", "hanlin-b3-u4", "hanlin-b3-u5"],
-  "prerequisite": {"wordlist_id": "moe2000", "lesson_ids": []},
+  "prerequisite": {"wordlist_id": "moe2000", "lesson_ids": [], "allow_basic_1200": true, "allow_extended_800": true},
   "sections": [
     {"id": "choice", "title": "單題選擇", "kind": "single_choice",
      "item_count": 25, "points_per_item": "2"},

@@ -125,6 +125,16 @@
           "title": "Lesson Ids",
           "type": "array"
         },
+        "allow_basic_1200": {
+          "default": true,
+          "title": "Allow Basic 1200",
+          "type": "boolean"
+        },
+        "allow_extended_800": {
+          "default": true,
+          "title": "Allow Extended 800",
+          "type": "boolean"
+        },
         "content_hash": {
           "readOnly": true,
           "title": "Content Hash",

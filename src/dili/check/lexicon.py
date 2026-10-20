@@ -108,12 +108,14 @@ class Match:
 
 class Lexicon:
     def __init__(self, scope=(), prerequisite=(), glossed=(), *, application=(), lemmatizer=None,
-                 names=None):
+                 names=None, outside=()):
         self.lemmatizer = lemmatizer or Lemmatizer()
         self.names = load_names() if names is None else {n.lower() for n in names}
         self.entries = {}
         self.application = set()
-        for layer, heads in (("scope", scope), ("prerequisite", prerequisite), ("glossed", glossed)):
+        # Disabled wordlists remain known for morphology and diagnostics, but never allowed.
+        for layer, heads in (("scope", scope), ("prerequisite", prerequisite), ("glossed", glossed),
+                             ("outside", outside)):
             for head in heads:
                 canonical, aliases = expand_headword(head)
                 for alias in aliases:
@@ -177,6 +179,7 @@ class Lexicon:
             prefix = text[:token.start()].rstrip()
             sentence_start = not prefix or prefix[-1] in ".!?\n。！？"
             if (kind == "word" and word[0].isupper() and all(layer == "outside" for _, layer in candidates)
+                    and all(lemma not in self.entries for lemma, _ in candidates)
                     and (not sentence_start or re.sub(r"['’]s?$", "", word.lower()) in self.names)):
                 kind = "proper_name"
             result.append(Match(word, candidates, kind))

@@ -54,24 +54,25 @@ def item_texts(item):
     yield from figure_texts(item.figure)
 
 
-def check_text(text, lexicon, report, obj, extended=frozenset()):
+def check_text(text, lexicon, report, obj, unavailable=None):
     # Cloze placeholders and letter-hint blanks (l______r) are markup, not words.
     text = re.sub(r"\{\{\d+\}\}", " ___ ", text)
     text = re.sub(r"[A-Za-z]*_{2,}[A-Za-z]*", " ___ ", text)
     for match in lexicon.scan(text):
+        labels = sorted({label for lemma, layer in match.candidates if layer == "outside"
+                         for label in (unavailable or {}).get(lemma, ())})
+        disabled = "、".join(f"{label}（本卷未開放）" for label in labels)
         if match.kind in {"number", "proper_name"}:
             label = "數字" if match.kind == "number" else "可能的專有名詞"
             report.add("infos", match.kind, f"{label}，請人工確認。", obj=obj, words=[match.text])
         elif match.layer == "ambiguous" and any(layer == "outside" for _, layer in match.candidates):
             # Only an out-of-range reading is a risk; scope/prerequisite/gloss mixes are all allowed.
             detail = "、".join(f"{lemma} ({layer})" for lemma, layer in match.candidates)
-            report.add("warnings", "ambiguous_lemma", f"詞形跨層歧義，尚未判定通過：{detail}",
+            report.add("warnings", "ambiguous_lemma", f"詞形跨層歧義，尚未判定通過：{detail}"
+                       + (f"；{disabled}" if disabled else ""),
                        obj=obj, words=[match.text, *(lemma for lemma, _ in match.candidates)])
         elif match.layer == "outside":
-            if any(lemma in extended for lemma, _ in match.candidates):
-                message = "課綱 800 字（不在 1200 基本字內），請附註中文或改寫。"
-            else:
-                message = "超範圍生字，請附註中文或改寫。"
+            message = f"{disabled or '超範圍生字'}，請附註中文或改寫。"
             report.add("errors", "out_of_scope", message, obj=obj, words=[match.text])
         else:
             layer = min((layer for _, layer in match.candidates), key=LAYER_ORDER.get)
@@ -161,20 +162,24 @@ def check_exam(blueprint: Blueprint, batches, *, lessons, wordlist: WordList,
 
     scope = [v for key in blueprint.scope if key in catalog for v in catalog[key].vocab]
     prerequisite = [v.headword for key in blueprint.prerequisite.lesson_ids if key in catalog for v in catalog[key].vocab]
-    extended = set()
+    outside, unavailable = [], {}
     if wordlist.id == blueprint.prerequisite.wordlist_id:
-        # Only the 1,200 basic words may appear freely; the other 800 need a gloss (Richard, 2026-10-18).
-        prerequisite.extend(e.headword for e in wordlist.entries if e.basic_1200)
         for e in wordlist.entries:
-            if not e.basic_1200:
-                extended.update(expand_headword(e.headword)[1])
+            allowed = (blueprint.prerequisite.allow_basic_1200 if e.basic_1200
+                       else blueprint.prerequisite.allow_extended_800)
+            if allowed:
+                prerequisite.append(e.headword)
+            else:
+                outside.append(e.headword)
+                canonical = expand_headword(e.headword)[0]
+                unavailable.setdefault(canonical, set()).add("課綱 1200 基本字" if e.basic_1200 else "課綱 800 字")
     lemmatizer = Lemmatizer(irregular_path)
     names = load_names()
 
     def lexicon(glosses):
         return Lexicon([v.headword for v in scope], prerequisite, [g.word for g in glosses],
                        application=[v.headword for v in scope if v.textbook_category == "application"],
-                       lemmatizer=lemmatizer, names=names)
+                       lemmatizer=lemmatizer, names=names, outside=outside)
 
     group_for_item = {id(item): group for group in groups for item in group.items}
     pending_items = sum(i.status == "pending" for i in items)
@@ -184,14 +189,14 @@ def check_exam(blueprint: Blueprint, batches, *, lessons, wordlist: WordList,
     for group in groups:
         group_lexicon = lexicon(group.glossed)
         for text in (group.instruction, group.passage or "", *figure_texts(group.figure)):
-            check_text(text, group_lexicon, report, group, extended)
+            check_text(text, group_lexicon, report, group, unavailable)
         if group.status == "pending":
             report.add("infos", "pending", "題組待人工審核。", obj=group)
     for item in items:
         group = group_for_item.get(id(item))
         item_lexicon = lexicon((*group.glossed, *item.glossed) if group else item.glossed)
         for text in item_texts(item):
-            check_text(text, item_lexicon, report, item, extended)
+            check_text(text, item_lexicon, report, item, unavailable)
         # Reading answers can be sentences or facts from a passage/table even
         # when their targets are vocabulary only. Their words still pass
         # through check_text above; standalone and cloze vocabulary choices
