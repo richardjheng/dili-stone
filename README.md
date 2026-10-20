@@ -48,7 +48,7 @@
 | `dili plan 藍圖 --run ID` | 建立一次出卷，分配各大題考點 |
 | `dili generate ID` | 經 Agora 派工出題，交付後自動檢核，有錯帶回重派 |
 | `dili review ID`／`dili revise ID` | 另一個 AI 交叉審題／把審題意見交回出題者修改 |
-| `dili review-ui [ID] [--reviewer 名稱]` | 開啟本機閱卷網頁：每題評難易度、寫意見，可暫時存檔、完成閱卷（也可雙擊 `閱卷.bat`；不指定 ID 時用最近一次出卷） |
+| `dili review-ui [ID] [--reviewer 名稱]` | 開啟本機閱卷網頁：每題評難易度、寫意見，可暫時存檔、完成閱卷（也可雙擊 `review.bat`；不指定 ID 時用最近一次出卷） |
 | `dili feedback ID` | 把完成的閱卷意見交回出題者修改 |
 | `dili build ID` | 整卷檢核並輸出試題卷與答案解析卷 |
 
