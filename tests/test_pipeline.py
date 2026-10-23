@@ -158,3 +158,59 @@ class PipelineTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class MakeTests(unittest.TestCase):
+    def setUp(self):
+        self._tmp = tempfile.TemporaryDirectory()
+        self._cwd = os.getcwd()
+        os.chdir(self._tmp.name)
+        self.catalog = pipeline.Catalog.load(ROOT / "data/lessons", ROOT / "data/wordlists/moe2000.csv")
+
+    def tearDown(self):
+        os.chdir(self._cwd)
+        self._tmp.cleanup()
+
+    def test_failed_writer_falls_back_and_reviewer_differs(self):
+        from dili.pipeline import make
+
+        calls = {"generate": [], "review": [], "revise": [], "build": 0}
+
+        def generate(run, section, catalog, *, worker, log):
+            calls["generate"].append((section, worker))
+            ok = not (section == "words" and worker == "codex")  # codex fails once
+            run.update_section(section, worker=worker, status="generated" if ok else "failed")
+            return ok
+
+        def review(run, section, catalog, *, reviewer, log):
+            calls["review"].append((section, reviewer))
+            run.update_section(section, review_status="reviewed")
+            return True
+
+        def revise(run, section, catalog, *, worker, log):
+            calls["revise"].append((section, worker))
+            return True
+
+        def build(run, catalog, *, log, write_word):
+            calls["build"] += 1
+            self.assertFalse(write_word)
+            return True
+
+        patches = {"generate_section": generate, "review_section": review, "revise_section": revise,
+                   "build_run": build, "STAGGER": 0}
+        originals = {k: getattr(make, k) for k in patches}
+        try:
+            for k, v in patches.items():
+                setattr(make, k, v)
+            run = make.make_exam("m1", BLUEPRINT, self.catalog, log=lambda *_: None)
+        finally:
+            for k, v in originals.items():
+                setattr(make, k, v)
+        self.assertIn(("words", "codex"), calls["generate"])
+        self.assertIn(("words", "claude"), calls["generate"])  # next after codex in FALLBACK
+        state = run.state()["sections"]
+        self.assertTrue(all(e["reviewer"] != e["worker"] for e in state.values()))
+        self.assertEqual(len(calls["review"]), 5)
+        self.assertEqual(len(calls["revise"]), 5)
+        self.assertEqual(calls["build"], 1)
+        self.assertEqual(Path("runs/CURRENT").read_text(encoding="utf-8").strip(), "m1")

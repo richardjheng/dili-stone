@@ -197,7 +197,7 @@ def ai_review_flags(batches: list[Batch]) -> Report:
     return report
 
 
-def build_run(run: Run, catalog: Catalog, *, force: bool = False, log=print) -> bool:
+def build_run(run: Run, catalog: Catalog, *, force: bool = False, write_word: bool = True, log=print) -> bool:
     blueprint = run.blueprint()
     from dili.review import attach_human, finals
 
@@ -211,6 +211,8 @@ def build_run(run: Run, catalog: Catalog, *, force: bool = False, log=print) -> 
     summary = report.render(infos=False)
     (run.root / "report.txt").write_text(summary + "\n", encoding="utf-8")
     log(summary)
+    if not write_word:
+        return not report.errors
     if report.errors and not force:
         log("有錯誤，未輸出 Word（加 --force 可強制輸出）。")
         return False

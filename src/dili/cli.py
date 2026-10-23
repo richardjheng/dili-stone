@@ -11,6 +11,9 @@ from dili.models import Batch, Blueprint, Lesson, load_wordlist
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="dili", description="砥礪英文考卷")
     commands = parser.add_subparsers(dest="command", required=True)
+    make = commands.add_parser("make", help="一次出一份新考卷：分配考點、出題、交叉審題、修題、檢核")
+    make.add_argument("blueprint", type=Path)
+    make.add_argument("--run", help="出卷 ID；預設為「藍圖ID-日期時間」")
     plan = commands.add_parser("plan", help="建立一次出卷：分配考點並產生工作單")
     plan.add_argument("blueprint", type=Path)
     plan.add_argument("--run", required=True, help="出卷 ID，例如 b3-term2-a")
@@ -80,6 +83,13 @@ def _pipeline(args) -> int:
     from dili import pipeline
 
     catalog = pipeline.Catalog.load()
+    if args.command == "make":
+        from datetime import datetime
+        from dili.pipeline.make import make_exam
+        run_id = args.run or f"{args.blueprint.stem}-{datetime.now():%Y%m%d-%H%M}"
+        run = make_exam(run_id, args.blueprint, catalog)
+        print(f"\n完成：{run.id}。可以閱卷了：雙擊 review.bat（預設就是這一份）。")
+        return 0
     if args.command == "plan":
         run = pipeline.plan_run(args.run, args.blueprint, catalog)
         print(f"已建立 {run.root.as_posix()}；分工：")

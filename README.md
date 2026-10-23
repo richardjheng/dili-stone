@@ -45,6 +45,7 @@
 
 | 指令 | 用途 |
 | --- | --- |
+| `dili make 藍圖 [--run ID]` | 一次出一份新考卷：分配考點、三個 AI 平行出題、交叉審題、修題、檢核（也可雙擊 `new-exam.bat`） |
 | `dili plan 藍圖 --run ID` | 建立一次出卷，分配各大題考點 |
 | `dili generate ID` | 經 Agora 派工出題，交付後自動檢核，有錯帶回重派 |
 | `dili review ID`／`dili revise ID` | 另一個 AI 交叉審題／把審題意見交回出題者修改 |
